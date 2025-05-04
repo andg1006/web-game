@@ -94,7 +94,7 @@ function Page1() {
     };
 
     return (
-        <div className={`page-container ${fadeIn ? 'fade-in' : ''}`}>
+        <div className={`page-container bg1 ${fadeIn ? 'fade-in' : ''}`}>
             <Menu />
             {showSceneText && <div className="scene-text">- 학교 앞 -</div>}
 

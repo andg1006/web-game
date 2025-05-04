@@ -6,7 +6,7 @@ import './css/page-def.css';
 const dialogues = [
     { speaker: 'an', text: ' 원래 이렇게 어두웠나...?' },
     { speaker: 'choi', text: ' 불이 다 꺼져있으니까 어둡지' },
-    { speaker: 'an', text: ' 근데 중앙현관은 불리 켜져있네..?' },
+    { speaker: 'an', text: ' 근데 중앙현관은 불이이 켜져있네..?' },
     { speaker: 'choi', text: ' 그러게, 일단 반이나 빨리 가자' },
 ];
 

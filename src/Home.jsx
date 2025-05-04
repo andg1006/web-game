@@ -21,7 +21,7 @@ function Home() {
     if (savedPage) {
       setIsStartOpen(true);
     } else {
-      navigate('/PM-9/phone');
+      navigate('/web-game/phone');
     }
   };
 

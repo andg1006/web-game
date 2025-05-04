@@ -1,0 +1,99 @@
+.menu-modal {
+    width: 700px;
+    height: 500px;
+
+    position: absolute;
+    z-index: 10;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: black;
+
+    border: 3px outset white;
+
+    color: white;
+}
+.menu-modal h1{
+    width: 100%;
+    height: 75px;
+
+    text-align: center;
+    align-content: center;
+
+    border-bottom: 2px dashed;
+}
+.menu-modal ul{
+    width: 100%;
+    height: 370px;
+
+    font-size: 1.5em;
+    text-align: center;
+    align-content: center;
+    line-height: 100px;
+}
+.menu-modal button{
+    height: 50px;
+
+    font-size: 1.5em;
+
+    cursor: pointer;
+
+    color: white;
+}
+.menu-modal button:hover{
+    color: red;
+}
+.menu-modal button:active{
+    color: darkred;
+    border-bottom: 1px solid darkred;
+}
+
+.again {
+    width: 700px;
+    height: 500px;
+
+    position: absolute;
+    z-index: 10;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: black;
+
+    border: 3px outset white;
+
+    color: white;
+}
+.again h1{
+    width: 100%;
+    height: 75px;
+
+    text-align: center;
+    align-content: center;
+
+    border-bottom: 2px dashed;
+}
+.again ul{
+    width: 100%;
+    height: 370px;
+
+    font-size: 1.5em;
+    text-align: center;
+    align-content: center;
+    line-height: 100px;
+}
+.again button{
+    height: 50px;
+
+    font-size: 1.5em;
+
+    cursor: pointer;
+
+    color: white;
+}
+.again button:hover{
+    color: red;
+}
+.again button:active{
+    color: darkred;
+    border-bottom: 1px solid darkred;
+}

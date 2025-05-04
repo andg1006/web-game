@@ -1,0 +1,123 @@
+.page-container {
+    width: 100%;
+    height: 750px;
+    background-image: url('../back-images/bg1.png');
+    background-size: contain;
+    /* 잘림 방지 */
+    background-repeat: no-repeat;
+    background-position: top center;
+    /* 상단 정렬 */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    opacity: 0;
+    transition: opacity 1.5s ease;
+}
+
+.page-container.fade-in {
+    opacity: 1;
+}
+
+.scene-text {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    font-size: 2em;
+    color: white;
+
+    opacity: 0;
+    animation: fadeScene 2s forwards;
+}
+
+@keyframes fadeScene {
+    0% {
+        opacity: 0;
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.txt-box {
+    width: 1200px;
+    height: 200px;
+
+    border: 5px solid white;
+    border-radius: 30px;
+
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, -0%);
+
+    display: flex;
+    align-items: center;
+
+    opacity: 0;
+    transition: opacity 1.5s ease;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none
+}
+
+.left {
+    width: 200px;
+    height: 100%;
+
+    padding-right: 10px;
+
+
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+
+.left img {
+    height: 100%;
+}
+
+.choi {
+    display: none;
+}
+
+.right {
+    width: 1000px;
+    height: 100%;
+}
+
+.right .top {
+    width: 100%;
+    height: 30%;
+
+    font-size: 1.3em;
+
+    align-content: center;
+}
+
+.right .bottom {
+    width: 100%;
+    height: 70%;
+
+    font-size: 1.2em;
+}
+
+.txt-box.fade-in {
+    opacity: 1;
+}

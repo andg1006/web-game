@@ -1,22 +1,24 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
-import Menu from '../navbar/menu';
-import './css/page-def.css';
-import './css/back-img.css';
+import Menu from '../../navbar/menu';
+import '../css/page-def.css';
+import '../css/back-img.css';
 
-// 2층 교무실
+// 교무실 둘러보기
 
 const dialogues = [
-    { speaker: 'choi', text: ' 야 아까 교무실 불 켜져 있지 않았어..?' },
-    { speaker: 'an', text: ' 뭐래, 이 시간에 왜 불이 켜져 있어' },
-    { speaker: 'an', text: ' 잘 못 본 거 아니야?' },
-    { speaker: 'choi', text: ' 아니야 아까 불 켜져 있었는데...' },
-    { speaker: 'an', text: ' 그건 모르겠고 일단 우리 열쇠 가져갈래?' },
-    { speaker: 'choi', text: ' 그냥 카드로 문 따면 안 돼?' },
-    { speaker: 'an', text: ' 뭔 카드로 문을...' },
+    { speaker: 'an', text: ' 일단 들어오긴 했는데...' },
+    { speaker: 'choi', text: ' 너무 어두운데?' },
+    { speaker: 'an', text: ' 야 손전등 좀 켜봐' },
+    { speaker: 'choi', text: ' 너가 좀 켜면 안 돼?' },
+    { speaker: 'an', text: ' 그건 난 모르겠고~' },
+    { speaker: 'choi', text: ' 저 못돼먹은 거 봐라' },
+    { speaker: 'choi', text: ' 이제 잘 보이냐?' },
+    { speaker: 'an', text: ' 매우 만족합니다!' },
+    { speaker: 'choi', text: ' 어휴... 어디부터 찾을래?' },
 ];
 
-function Page4() {
+function Page4_1() {
     const navigate = useNavigate();
 
     const [fadeIn, setFadeIn] = useState(false);
@@ -90,13 +92,14 @@ function Page4() {
         }
     };
 
-    const 교무실 = () => navigate('/web-game/page4/chapter');
-    const 다음층으로 = () => navigate('/web-game/page4/page1');
+    const 담임쌤 = () => navigate('/web-game/page4/chapter1');
+    const 출석부 = () => navigate('/web-game/page4/chapter2');
+    const ㅇㅇ쌤 = () => navigate('/web-game/page4/chapter3');
 
     return (
         <div className={`page-container bg4 ${fadeIn ? 'fade-in' : ''}`}>
             <Menu />
-            {showSceneText && <div className="scene-text">- 2층 교무실 앞 -</div>}
+            {showSceneText && <div className="scene-text">- 교무실 -</div>}
 
             <div className={`txt-box ${showTxtBox ? 'fade-in' : ''}`} onClick={handleClick}>
                 <div className="left">
@@ -121,8 +124,9 @@ function Page4() {
                         </>
                     ) : (
                         <div className="choice-container">
-                            <button className="choice-btn" onClick={교무실}>교무실에 들어간다.</button>
-                            <button className="choice-btn" onClick={다음층으로}>3층으로 올라간다.</button>
+                            <button className="choice-btn" onClick={담임쌤}>담임쌤 자리를 탐색한다.</button>
+                            <button className="choice-btn" onClick={출석부}>출석부 책상을 탐색한다.</button>
+                            <button className="choice-btn" onClick={ㅇㅇ쌤}>???쌤 자리를 탐색한다.</button>
                         </div>
                     )}
                 </div>
@@ -131,4 +135,4 @@ function Page4() {
     );
 }
 
-export default Page4;
+export default Page4_1;

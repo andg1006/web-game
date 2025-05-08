@@ -4,12 +4,14 @@ import Menu from '../navbar/menu';
 import './css/page-def.css';
 import './css/back-img.css';
 
+// 1층 중앙현관
+
 const dialogues = [
     { speaker: 'an', text: ' 원래 이렇게 어두웠나...?' },
     { speaker: 'choi', text: ' 불이 다 꺼져있으니까 어둡지' },
-    { speaker: 'an', text: ' 근데 교무실엔 불이..' },
+    { speaker: 'an', text: ' 아니 그걸 누가...' },
     { speaker: 'choi', text: ' 아 몰라, 빨리 올라가자' },
-    { speaker: 'an', text: ' 미친건가..' },
+    { speaker: 'an', text: ' 미친 건가..' },
     { speaker: 'choi', text: ' 음? 뭐라고?' },
     { speaker: 'an', text: ' 아냐 빨리 올라가자고' },
 ];

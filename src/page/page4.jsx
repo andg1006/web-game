@@ -5,23 +5,16 @@ import './css/page-def.css';
 import './css/back-img.css';
 
 const dialogues = [
-    { speaker: 'choi', text: ' 원래 이 시간에 불이 켜져있었냐..?' },
-    { speaker: 'an', text: ' 몰라?' },
-    { speaker: 'choi', text: ' 야, 지금 몇시야?' },
-    { speaker: 'an', text: ' 몰라?' },
-    { speaker: 'choi', text: ' ...?' },
-    { speaker: 'an', text: ' ...?' },
-    { speaker: 'choi', text: ' 뭐만 하면 모른데, 미친거냐?' },
-    { speaker: 'an', text: ' 모를 수도 있지..' },
-    { speaker: 'an', text: ' 지금이... 9시네!' },
-    { speaker: 'choi', text: ' 오키, 학교 불 켜져있을 때 빨리 들어갔다 오자' },
-    { speaker: 'an', text: ' 야, 근데.. 너무 무서운거 아니야?' },
-    { speaker: 'choi', text: ' 야ㅡㅡ 9시니까 무서워 보이는 거야' },
-    { speaker: 'choi', text: ' 너 빨리 안오면 먼저 들어간다?' },
-    { speaker: 'an', text: ' 아.. 같이가!!' },
+    { speaker: 'an', text: ' 원래 이렇게 어두웠나...?' },
+    { speaker: 'choi', text: ' 불이 다 꺼져있으니까 어둡지' },
+    { speaker: 'an', text: ' 근데 교무실엔 불이..' },
+    { speaker: 'choi', text: ' 아 몰라, 빨리 올라가자' },
+    { speaker: 'an', text: ' 미친건가..' },
+    { speaker: 'choi', text: ' 음? 뭐라고?' },
+    { speaker: 'an', text: ' 아냐 빨리 올라가자고' },
 ];
 
-function Page1() {
+function Page4() {
     const navigate = useNavigate();
 
     const [fadeIn, setFadeIn] = useState(false);
@@ -89,15 +82,14 @@ function Page1() {
         if (currentIndex < dialogues.length - 1) {
             setCurrentIndex(prev => prev + 1);
         } else {
-            // 마지막 대사 끝났을 때 page2로 이동!
-            navigate('/web-game/page2');
+            navigate('/web-game/page3');
         }
     };
 
     return (
-        <div className={`page-container bg1 ${fadeIn ? 'fade-in' : ''}`}>
+        <div className={`page-container bg2 ${fadeIn ? 'fade-in' : ''}`}>
             <Menu />
-            {showSceneText && <div className="scene-text">- 학교 앞 -</div>}
+            {showSceneText && <div className="scene-text">- 2층 교무실 -</div>}
 
             <div className={`txt-box ${showTxtBox ? 'fade-in' : ''}`} onClick={handleClick}>
                 <div className="left">
@@ -119,4 +111,4 @@ function Page1() {
     );
 }
 
-export default Page1;
+export default Page4;

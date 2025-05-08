@@ -5,23 +5,15 @@ import './css/page-def.css';
 import './css/back-img.css';
 
 const dialogues = [
-    { speaker: 'choi', text: ' 원래 이 시간에 불이 켜져있었냐..?' },
-    { speaker: 'an', text: ' 몰라?' },
-    { speaker: 'choi', text: ' 야, 지금 몇시야?' },
-    { speaker: 'an', text: ' 몰라?' },
-    { speaker: 'choi', text: ' ...?' },
-    { speaker: 'an', text: ' ...?' },
-    { speaker: 'choi', text: ' 뭐만 하면 모른데, 미친거냐?' },
-    { speaker: 'an', text: ' 모를 수도 있지..' },
-    { speaker: 'an', text: ' 지금이... 9시네!' },
-    { speaker: 'choi', text: ' 오키, 학교 불 켜져있을 때 빨리 들어갔다 오자' },
-    { speaker: 'an', text: ' 야, 근데.. 너무 무서운거 아니야?' },
-    { speaker: 'choi', text: ' 야ㅡㅡ 9시니까 무서워 보이는 거야' },
-    { speaker: 'choi', text: ' 너 빨리 안오면 먼저 들어간다?' },
-    { speaker: 'an', text: ' 아.. 같이가!!' },
+    { speaker: 'an', text: ' (...?)' },
+    { speaker: 'choi', text: ' 뭐해' },
+    { speaker: 'an', text: ' 누가 있...' },
+    { speaker: 'choi', text: ' 뭐가 있다고' },
+    { speaker: 'choi', text: ' 그만 쳐다보고 빨리 와' },
+    { speaker: 'an', text: ' 잘못 봤나...' },
 ];
 
-function Page1() {
+function Page3() {
     const navigate = useNavigate();
 
     const [fadeIn, setFadeIn] = useState(false);
@@ -39,9 +31,7 @@ function Page1() {
 
     useEffect(() => {
         setTimeout(() => setFadeIn(true), 100);
-        setTimeout(() => setShowSceneText(true), 1600);
-        setTimeout(() => setShowSceneText(false), 3600);
-        setTimeout(() => setShowTxtBox(true), 3700);
+        setTimeout(() => setShowTxtBox(true), 0.001);
     }, []);
 
     useEffect(() => {
@@ -90,14 +80,14 @@ function Page1() {
             setCurrentIndex(prev => prev + 1);
         } else {
             // 마지막 대사 끝났을 때 page2로 이동!
-            navigate('/web-game/page2');
+            navigate('/web-game/page4');
         }
     };
 
     return (
-        <div className={`page-container bg1 ${fadeIn ? 'fade-in' : ''}`}>
+        <div className={`page-container bg3 ${fadeIn ? 'fade-in' : ''}`}>
             <Menu />
-            {showSceneText && <div className="scene-text">- 학교 앞 -</div>}
+            {showSceneText && <div className="scene-text">- 계단 -</div>}
 
             <div className={`txt-box ${showTxtBox ? 'fade-in' : ''}`} onClick={handleClick}>
                 <div className="left">
@@ -119,4 +109,4 @@ function Page1() {
     );
 }
 
-export default Page1;
+export default Page3;

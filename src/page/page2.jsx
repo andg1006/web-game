@@ -2,12 +2,16 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 import Menu from '../navbar/menu';
 import './css/page-def.css';
+import './css/back-img.css';
 
 const dialogues = [
     { speaker: 'an', text: ' 원래 이렇게 어두웠나...?' },
     { speaker: 'choi', text: ' 불이 다 꺼져있으니까 어둡지' },
-    { speaker: 'an', text: ' 근데 중앙현관은 불이이 켜져있네..?' },
-    { speaker: 'choi', text: ' 그러게, 일단 반이나 빨리 가자' },
+    { speaker: 'an', text: ' 근데 교무실엔 불이..' },
+    { speaker: 'choi', text: ' 아 몰라, 빨리 올라가자' },
+    { speaker: 'an', text: ' 미친건가..' },
+    { speaker: 'choi', text: ' 음? 뭐라고?' },
+    { speaker: 'an', text: ' 아냐 빨리 올라가자고' },
 ];
 
 function Page2() {
@@ -79,7 +83,7 @@ function Page2() {
             setCurrentIndex(prev => prev + 1);
         } else {
             // 마지막 대사 끝났을 때 page2로 이동!
-            navigate('/web-game/page2');
+            navigate('/web-game/page3');
         }
     };
 

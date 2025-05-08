@@ -13,12 +13,6 @@
     opacity: 0;
     transition: opacity 1.5s ease;
 }
-.bg1{
-    background-image: url('/public/back-images/bg1.png');
-}
-.bg2{
-    background-image: url('/public/back-images/bg1.png');
-}
 
 .page-container.fade-in {
     opacity: 1;

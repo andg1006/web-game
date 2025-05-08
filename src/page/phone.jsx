@@ -21,7 +21,7 @@ function Phone() {
             setCurrentIndex(0);
             setFadeIn(false);
             setTimeout(() => setFadeIn(true), 50); // fade-in 적용
-        }, 1500);
+        }, 1000);
 
         return () => clearTimeout(timer);
     }, []);
@@ -34,7 +34,7 @@ function Phone() {
     const handleImageLoad = () => {
         setTimeout(() => {
             setShowClickText(true);
-        }, 1500);
+        }, 500);
     };
 
     const handleClick = () => {

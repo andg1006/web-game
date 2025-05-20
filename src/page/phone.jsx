@@ -30,6 +30,13 @@ function Phone() {
         localStorage.setItem('prevPage', location.pathname);
     }, []);
 
+    useEffect(() => {
+        images.forEach((src) => {
+          const img = new Image();
+          img.src = src;
+        });
+      }, []);
+
     // 이미지 로드 후 클릭 문구 표시
     const handleImageLoad = () => {
         setTimeout(() => {

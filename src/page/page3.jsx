@@ -1,5 +1,6 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
+import AutoButton from '../button/AutoButton'; // ✅ 오토버튼 import 추가
 import Menu from '../navbar/menu';
 import './css/page-def.css';
 import './css/back-img.css';
@@ -105,6 +106,7 @@ function Page3() {
                     </div>
                 </div>
             </div>
+            <AutoButton isTypingDone={!typing} onAutoNext={handleClick} />
         </div>
     );
 }

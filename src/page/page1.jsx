@@ -1,5 +1,6 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
+import AutoButton from '../button/AutoButton';
 import Menu from '../navbar/menu';
 import './css/page-def.css';
 import './css/back-img.css';
@@ -13,7 +14,7 @@ const dialogues = [
     { speaker: 'an', text: ' 몰라?' },
     { speaker: 'choi', text: ' ...?' },
     { speaker: 'an', text: ' ...?' },
-    { speaker: 'choi', text: ' 뭐만 하면 모른대, 미친 거냐?' },
+    { speaker: 'choi', text: ' 뭐만 하면 모른데, 미친 거냐?' },
     { speaker: 'an', text: ' 모를 수도 있지...' },
     { speaker: 'an', text: ' 지금이... 9시네!' },
     { speaker: 'choi', text: ' 오키, 학교 불 켜져 있을 때 빨리 들어갔다 오자' },
@@ -33,6 +34,8 @@ function Page1() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [displayText, setDisplayText] = useState('');
     const [typing, setTyping] = useState(false);
+
+    const [isTypingDone, setIsTypingDone] = useState(false); // 현재 대사 출력 완료 여부
 
     const currentDialogue = dialogues[currentIndex];
     const speaker = currentDialogue?.speaker;
@@ -67,6 +70,7 @@ function Page1() {
                     clearInterval(intervalRef.current);
                     intervalRef.current = null;
                     setTyping(false);
+                    setIsTypingDone(true); // ✅ 자동진행 조건
                     return;
                 }
                 setDisplayText(prev => prev + currentDialogue.text.charAt(i));
@@ -85,13 +89,14 @@ function Page1() {
             }
             setDisplayText(currentDialogue.text);
             setTyping(false);
+            setIsTypingDone(true); // 수동 클릭도 완료 상태로 간주
             return;
         }
 
         if (currentIndex < dialogues.length - 1) {
             setCurrentIndex(prev => prev + 1);
+            setIsTypingDone(false); // ✅ 초기화 필수!
         } else {
-            // 마지막 대사 끝났을 때 page2로 이동!
             navigate('/web-game/page2');
         }
     };
@@ -117,6 +122,7 @@ function Page1() {
                     </div>
                 </div>
             </div>
+            <AutoButton isTypingDone={isTypingDone} onAutoNext={handleClick} />
         </div>
     );
 }

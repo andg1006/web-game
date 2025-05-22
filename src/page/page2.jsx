@@ -1,10 +1,9 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
+import AutoButton from '../button/AutoButton'; // ✅ 자동진행 버튼 추가
 import Menu from '../navbar/menu';
 import './css/page-def.css';
 import './css/back-img.css';
-
-// 1층 중앙현관
 
 const dialogues = [
     { speaker: 'an', text: ' 원래 이렇게 어두웠나...?' },
@@ -50,7 +49,6 @@ function Page2() {
             setDisplayText('');
             setTyping(true);
 
-            // 기존 interval 제거 (혹시 모를 중복 방지)
             if (intervalRef.current) {
                 clearInterval(intervalRef.current);
             }
@@ -84,7 +82,6 @@ function Page2() {
         if (currentIndex < dialogues.length - 1) {
             setCurrentIndex(prev => prev + 1);
         } else {
-            // 마지막 대사 끝났을 때 page2로 이동!
             navigate('/web-game/page3');
         }
     };
@@ -110,6 +107,7 @@ function Page2() {
                     </div>
                 </div>
             </div>
+            <AutoButton isTypingDone={!typing} onAutoNext={handleClick} />
         </div>
     );
 }

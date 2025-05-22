@@ -1,5 +1,6 @@
 .page-container {
-    position: relative; /* ✅ 추가해줘야 해! */
+    position: relative;
+    /* ✅ 추가해줘야 해! */
     width: 100%;
     height: 750px;
     background-size: contain;
@@ -10,7 +11,7 @@
     justify-content: flex-start;
     opacity: 0;
     transition: opacity 1.5s ease;
-  }
+}
 
 .page-container.fade-in {
     opacity: 1;
@@ -58,7 +59,7 @@
     color: white;
 
     position: absolute;
-    bottom: -27.5%;
+    bottom: -25%;
     left: 50%;
     transform: translate(-50%, -0%);
 
@@ -150,19 +151,57 @@
 
 .click-target {
     position: absolute;
-    top: 42%; /* 원하는 비율로 조정 */
+    top: 42%;
+    /* 원하는 비율로 조정 */
     left: 62.3%;
-    width: 50px;    /* 화면 기준 너비 */
-    height: 270px;  /* 화면 기준 높이 */
+    width: 50px;
+    /* 화면 기준 너비 */
+    height: 270px;
+    /* 화면 기준 높이 */
     z-index: 9999;
     pointer-events: auto;
     cursor: pointer;
     animation: show 3s infinite;
 }
+
+.click-target2 {
+    position: absolute;
+    top: 580px;
+    left: 915px;
+    width: 250px;
+    height: 80px;
+    z-index: 9999;
+    pointer-events: auto;
+    transform: rotate(18deg);
+    /* ← 요게 핵심!! */
+    cursor: pointer;
+    transition: opacity 0.5s ease;
+}
+.click-target3 {
+    position: absolute;
+    top: 580px;
+    left: 915px;
+    width: 250px;
+    height: 80px;
+    z-index: 9999;
+    pointer-events: auto;
+    /* ← 요게 핵심!! */
+    cursor: pointer;
+    transition: opacity 0.5s ease;
+}
+
 @keyframes show {
-    0%{box-shadow: 0px 0px 5px gray;}
-    50%{box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);}
-    100%{box-shadow: 0px 0px 5px gray;}
+    0% {
+        box-shadow: 0px 0px 5px gray;
+    }
+
+    50% {
+        box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+    }
+
+    100% {
+        box-shadow: 0px 0px 5px gray;
+    }
 }
 
 .found-image {
@@ -183,23 +222,61 @@
     left: 0;
     width: 100%;
     height: 100%;
-    backdrop-filter: blur(5px); /* ✅ 블러 효과 */
-    background-color: rgba(0, 0, 0, 0.4); /* ✅ 어두운 반투명 배경 */
-    z-index: 998; /* 이미지보다 한 단계 아래 */
+    backdrop-filter: blur(5px);
+    /* ✅ 블러 효과 */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* ✅ 어두운 반투명 배경 */
+    z-index: 998;
+    /* 이미지보다 한 단계 아래 */
     opacity: 0;
     animation: fadeInBlur 2s forwards;
 }
-  
+
 @keyframes fadeInBlur {
-    0% { opacity: 0; }
-    20% { opacity: .5; }
-    80% { opacity: .5; }
-    100% { opacity: 0; }
+    0% {
+        opacity: 0;
+    }
+
+    20% {
+        opacity: .5;
+    }
+
+    80% {
+        opacity: .5;
+    }
+
+    100% {
+        opacity: 0;
+    }
 }
-  
+
 @keyframes fadeInOut {
-    0% { opacity: 0; }
-    20% { opacity: 1; }
-    80% { opacity: 1; }
-    100% { opacity: 0; }
+    0% {
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.auto {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+    padding: 10px 15px;
+    color: black;
+    border: 2px solid black;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
 }

@@ -6,7 +6,8 @@ function Start({ StartOpen, StartClose, onReturn }) {
     const savedPage = localStorage.getItem('prevPage');
 
     const goToPage1 = () => {
-        localStorage.removeItem('prevPage');
+        localStorage.removeItem('prevPage');     // 진행 저장 삭제
+        localStorage.removeItem('foundWig');     // 가발 상태도 초기화!
         navigate('/web-game/phone');
     };
 

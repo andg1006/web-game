@@ -32,10 +32,10 @@ function Phone() {
 
     useEffect(() => {
         images.forEach((src) => {
-          const img = new Image();
-          img.src = src;
+            const img = new Image();
+            img.src = src;
         });
-      }, []);
+    }, []);
 
     // 이미지 로드 후 클릭 문구 표시
     const handleImageLoad = () => {
@@ -58,6 +58,8 @@ function Phone() {
         }
     };
 
+    const 스킵 = () => navigate('/web-game/page1');
+
     return (
         <div style={{ position: 'relative', height: '100vh' }}>
             <Menu />
@@ -71,6 +73,22 @@ function Phone() {
                 />
             )}
             {showClickText && <p className="click-text">이미지를 클릭하세요!</p>}
+            <button style={{
+                position: "absolute",
+                top: "20px",
+                right: "20px",
+                zIndex: 10,
+
+                padding: "7.5px 12.5px",
+
+                backgroundColor: "rgba(0, 0, 0, 0.5)",
+                color: "white",
+                border: "3px solid white",
+                borderRadius: "10px",
+
+                fontWeight: "bold",
+                cursor: "pointer",
+            }} onClick={스킵}>스킵 ▶▶</button>
         </div>
     );
 }

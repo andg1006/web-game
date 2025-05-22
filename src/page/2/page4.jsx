@@ -1,5 +1,6 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
+import AutoButton from '../../button/AutoButton';
 import Menu from '../../navbar/menu';
 import '../css/page-def.css';
 import '../css/back-img2.css';
@@ -127,6 +128,7 @@ function Page4() {
                     )}
                 </div>
             </div>
+            <AutoButton isTypingDone={!typing} onAutoNext={handleClick} />
         </div>
     );
 }

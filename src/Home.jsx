@@ -1,6 +1,6 @@
 // Home.jsx
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, } from 'react';
 import './Home.css';
 
 import Rule from './modal/rule/Rule';
@@ -35,22 +35,24 @@ function Home() {
 
   return (
     <>
-      <div>
-        <Rule RuleOpen={isRuleOpen} RuleClose={RuleClose} />
-        <Setting_menu />
-        <div className="container">
-          <p>오후 9시</p>
-          <ul className="menu">
-            <li><button onClick={handleStartClick}>게임 시작</button></li>
-            <li><button onClick={RuleOpen}>게임 설명</button></li>
-          </ul>
+      <div className='main'>
+        <div>
+          <Rule RuleOpen={isRuleOpen} RuleClose={RuleClose} />
+          <Setting_menu />
+          <div className="container">
+            <p>오후 9시</p>
+            <ul className="menu">
+              <li><button onClick={handleStartClick}>게임 시작</button></li>
+              <li><button onClick={RuleOpen}>게임 설명</button></li>
+            </ul>
+          </div>
         </div>
+        <Start
+          StartOpen={isStartOpen}
+          StartClose={() => setIsStartOpen(false)}
+          onReturn={handleReturn}
+        />
       </div>
-      <Start
-        StartOpen={isStartOpen}
-        StartClose={() => setIsStartOpen(false)}
-        onReturn={handleReturn}
-      />
     </>
   );
 }

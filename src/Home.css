@@ -1,30 +1,42 @@
 @charset "UTF-8";
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-a{
+
+a {
     text-decoration: none;
     color: #333;
     display: block;
 }
-li{
+
+li {
     list-style: none;
 }
-button{
+
+button {
     cursor: pointer;
     background: none;
     border: none;
 }
-body{
+
+.main {
+    width: 100%;
+    height: 100vh;
+    background: url('../public/back-images/bg1.png') no-repeat center;
+    background-size: cover;
+}
+
+body {
     background-color: black;
 
     width: 100%;
     height: 100%;
 }
-.header{
+
+.header {
     width: 100%;
 
     padding-top: 20px;
@@ -33,36 +45,43 @@ body{
     position: absolute;
     top: 0;
 }
-.header .logo{
+
+.header .logo {
     width: 60px;
     height: 60px;
 }
-.header .logo button{
-    width: 100%;
-    height: 100%;
-}
-.header .logo img{
-    width: 100%;
-    height: 100%;
-}
-.header .menu{
-    width: 60px;
-    height: 60px;
-}
-.header .menu button{
-    width: 100%;
-    height: 100%;
-}
-.header .menu img{
+
+.header .logo button {
     width: 100%;
     height: 100%;
 }
 
-.container{
+.header .logo img {
+    width: 100%;
+    height: 100%;
+}
+
+.header .menu {
+    width: 60px;
+    height: 60px;
+}
+
+.header .menu button {
+    width: 100%;
+    height: 100%;
+}
+
+.header .menu img {
+    width: 100%;
+    height: 100%;
+}
+
+.container {
     text-align: center;
     align-content: center;
 }
-.container p{
+
+.container p {
     margin-top: 100px;
 
     position: absolute;
@@ -72,21 +91,25 @@ body{
     color: white;
     font-size: 5em;
 }
-.container ul{
+
+.container ul {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
 }
-.container ul li button{
+
+.container ul li button {
     color: white;
     font-size: 2.5em;
     margin-top: 50px;
 }
-.container ul li button:hover{
+
+.container ul li button:hover {
     color: red;
 }
-.container ul li button:active{
+
+.container ul li button:active {
     color: darkred;
     border-bottom: 1px solid darkred;
 }

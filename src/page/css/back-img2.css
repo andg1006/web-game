@@ -7,6 +7,12 @@
 .bg2-3{
     background-image: url('/public/back-images/2/bg3.png');
 }
+.bg2-3b {
+    background-image: url('/public/back-images/2/bg3_after.png');
+}
+.bg2-3b2 {
+    background-image: url('/public/back-images/2/bg3_after2.png');
+}
 .bg2-4{
     background-image: url('/public/back-images/2/bg4.png');
 }

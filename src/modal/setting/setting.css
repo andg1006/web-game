@@ -13,7 +13,8 @@
 
     color: white;
 }
-.setting h1{
+
+.setting h1 {
     width: 100%;
     height: 75px;
 
@@ -23,16 +24,35 @@
     border-bottom: 2px dashed;
 }
 
-.setting ul{
+.setting ul {
     width: 100%;
     height: 370px;
 
     font-size: 1.5em;
 
-    text-align: center;
+    justify-items: center;
     align-content: center;
 }
-.setting button{
+.setting ul li{
+    text-align: start;
+}
+.setting ul li p{
+    padding-left: 10px;
+}
+.setting .set{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.setting .set button{
+    width: 40px;
+    height: 40px;
+    font-size: 40px;
+    line-height: 0;
+    text-align: left;
+}
+
+.setting .close {
     width: 100px;
     height: 50px;
 
@@ -46,7 +66,51 @@
 
     background-color: #fff;
 }
-.setting button:active{
+
+.setting .close:active {
     background-color: red;
     color: white;
 }
+
+.volume-slider {
+    width: 300px;
+    border-radius: 100px;
+    appearance: none; /* 슬라이더 스타일 초기화 (크롬 기준) */
+}
+.volume-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: yellow;
+    border: 2px solid orange;
+    cursor: pointer;
+}
+/* 기본 슬라이더 바 (sound ON 상태) */
+.volume-slider::-webkit-slider-runnable-track {
+    background: #ffffff;
+    border-radius: 100px;
+}
+
+/* 🔇 음소거 상태일 때 슬라이더 바 색상 변경 */
+.volume-slider.muted::-webkit-slider-runnable-track {
+    background: #444444; /* 또는 red 같은 걸로 바꿔도 됨! */
+}
+
+
+.thumb-label {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    font-size: 13px;
+    font-weight: bold;
+    color: black;
+    background: yellow;
+    border: 2px solid orange;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none; /* 클릭 막기 */
+    z-index: 2;
+  }

@@ -1,5 +1,6 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
+import AutoButton from '../../button/AutoButton';
 import Menu from '../../navbar/menu';
 import '../css/page-def.css';
 import '../css/back-img2.css';
@@ -7,13 +8,13 @@ import '../css/back-img2.css';
 // 교무실 둘러보기
 
 const dialogues = [
-    { speaker: 'an', text: ' 야 찾고 있는거 맞아?' },
-    { speaker: 'choi', text: ' 찾고 있는데 안보이는 거 같은데..' },
-    { speaker: 'an', text: ' 여기 열쇠가 없나봐' },
-    { speaker: 'choi', text: ' 아... 시간낭비..' },
-    { speaker: 'an', text: ' 열심히 찾았는데...' },
-    { speaker: 'choi', text: ' 어쩔 수 없지' },
-    { speaker: 'choi', text: ' 다른 곳도 찾아보자' },
+    { speaker: 'an', text: ' 여기가 우리 담임쌤 자리 맞지?' },
+    { speaker: 'choi', text: ' 어, 맞는 것 같다' },
+    { speaker: 'an', text: ' 좋아, 함 찾아볼까?' },
+    { speaker: 'choi', text: ' 음... 없는 것 같지?' },
+    { speaker: 'an', text: ' 없는 것 같네, 찾는데 생각보다 오래걸리네' },
+    { speaker: 'choi', text: ' 그냥 힘만 빠졌잖아...' },
+    { speaker: 'an', text: ' 일단 다른 곳도 찾아보자' },
 ];
 
 function Chapter1() {
@@ -22,6 +23,9 @@ function Chapter1() {
     const [fadeIn, setFadeIn] = useState(false);
     const [showSceneText, setShowSceneText] = useState(false);
     const [showTxtBox, setShowTxtBox] = useState(false);
+    const [bgClass, setBgClass] = useState('bg2-3'); // 초기 배경 클래스
+    const [showBox, setShowBox] = useState(true);
+
 
     const [currentIndex, setCurrentIndex] = useState(0);
     const [displayText, setDisplayText] = useState('');
@@ -94,7 +98,7 @@ function Chapter1() {
     const ㅇㅇ쌤 = () => navigate('/web-game/page4/chapter3');
 
     return (
-        <div className={`page-container bg2-3 ${fadeIn ? 'fade-in' : ''}`}>
+        <div className={`page-container ${bgClass} ${fadeIn ? 'fade-in' : ''}`}>
             <Menu />
             {showSceneText && <div className="scene-text">- 담임쌤 책상 -</div>}
 
@@ -127,6 +131,13 @@ function Chapter1() {
                     )}
                 </div>
             </div>
+            {showBox && (
+                <div className="click-target2" onClick={() => {
+                    setShowBox(false)
+                    setBgClass('bg2-3b')
+                }} />
+            )}
+            <AutoButton isTypingDone={!typing} onAutoNext={handleClick} />
         </div>
     );
 }

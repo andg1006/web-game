@@ -1,5 +1,6 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
+import AutoButton from '../../button/AutoButton';
 import Menu from '../../navbar/menu';
 import '../css/page-def.css';
 import '../css/back-img2.css';
@@ -16,11 +17,12 @@ const dialogues = [
     { speaker: 'choi', text: ' 배터리가 없어서 전원이 안켜지나...' },
     { speaker: 'an', text: ' 어째서 우리에게 이런 시련을...' },
     { speaker: 'an', text: ' 어쩔 수 없다, 어둡지만 그냥 찾아야지...' },
-    { speaker: 'choi', text: ' 그래 얼른 찾고 나가자' }, // 이 대사가 끝난 후 이미지의 어느 부분을 클릭하기 전까지 이 대사가 고정
+    { speaker: 'sys', text: ' 2-8반의 출석부를 찾자' }, // 이 대사가 끝난 후 이미지의 어느 부분을 클릭하기 전까지 이 대사가 고정
     // 이미지의 어느 부분을 클릭하여 출석부를 찾았을 떄 나오는 대사
     { speaker: 'an', text: ' 찾았다!' },
     { speaker: 'choi', text: ' 오 나이스' },
     { speaker: 'an', text: ' 열쇠 찾았으니까 얼른 나가자' },
+    { speaker: 'choi', text: ' 3층으로 빨리 가자!' },
 ];
 
 function Chapter2() {
@@ -112,7 +114,7 @@ function Chapter2() {
             setCurrentIndex(prev => prev + 1);
         } 
         else if (currentIndex === dialogues.length - 1) {
-            navigate('/web-game/In-development');
+            navigate('/web-game/page5');
         }
     };
     
@@ -140,15 +142,18 @@ function Chapter2() {
                 <div className="left">
                     <img className='an' src={import.meta.env.BASE_URL + "images/an1.png"} style={{ display: speaker === 'an' ? 'block' : 'none' }} />
                     <img className='choi' src={import.meta.env.BASE_URL + "images/choi1.png"} style={{ display: speaker === 'choi' ? 'block' : 'none' }} />
+                    <img className='sys' src={import.meta.env.BASE_URL + "images/.png"} style={{ display: speaker === 'sys' ? 'block' : 'none' }} />
                 </div>
                 <div className="right">
                     <div className="top">
                         <h3 className='an' style={{ display: speaker === 'an' ? 'block' : 'none' }}>안동근</h3>
                         <h3 className='choi' style={{ display: speaker === 'choi' ? 'block' : 'none' }}>최태민</h3>
+                        <h3 className='sys' style={{ display: speaker === 'sys' ? 'block' : 'none' }}></h3>
                     </div>
                     <div className="bottom">
                         <p className='an' style={{ display: speaker === 'an'  ? 'block' : 'none' }}>{displayText}</p>
                         <p className='choi' style={{ display: speaker === 'choi' ? 'block' : 'none' }}>{displayText}</p>
+                        <p className='sys' style={{ display: speaker === 'sys' ? 'block' : 'none' }}>{displayText}</p>
                     </div>
                 </div>
             </div>
@@ -163,6 +168,7 @@ function Chapter2() {
                     className="found-image"
                 />
             )}
+            <AutoButton isTypingDone={!typing} onAutoNext={handleClick} />
         </div>
     );
 }

@@ -5,5 +5,8 @@
     background-image: url('/public/back-images/bg2.png');
 }
 .bg3{
+    background-image: url('/public/back-images/bg3-1.png');
+}
+.bg3-after{
     background-image: url('/public/back-images/bg3.png');
 }

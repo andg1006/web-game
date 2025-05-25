@@ -92,7 +92,7 @@ function Page4() {
     };
 
     const 교무실 = () => navigate('/web-game/page4/chapter');
-    const 다음층으로 = () => navigate('/web-game/In-development');
+    const 다음층으로 = () => navigate('/web-game/page4/page1');
 
     return (
         <div className={`page-container bg2-1 ${fadeIn ? 'fade-in' : ''}`}>

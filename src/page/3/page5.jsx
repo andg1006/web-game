@@ -1,5 +1,6 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
+import AutoButton from '../../button/AutoButton'; // ✅ 오토버튼 import 추가
 import Menu from '../../navbar/menu';
 import '../css/page-def.css';
 import '../css/back-img3.css';
@@ -9,20 +10,23 @@ import '../css/back-img3.css';
 const dialogues = [
     { speaker: 'an', text: ' 역시 계단은 힘들다...' },
     { speaker: 'an', text: ' 여긴... 왜 이렇게 어두워?' },
-    { speaker: 'choi', text: ' 와, 진짜 대단하다' },
-    { speaker: 'choi', text: ' 계단 하나 올라올 때마다 겁 먹는 것도 재능이다' },
-    { speaker: 'an', text: ' 헤헷... 나 겁 많잖아... 너 알잖아...?' },
-    { speaker: 'choi', text: ' 알지, 너 겁 많은건 다 아는 사실이지' },
-    { speaker: 'an', text: ' 불 안 들어오는 건 처음 보는 거 같은데...' },
-    { speaker: 'choi', text: ' 동근아.' },  
-    { speaker: 'an', text: ' 응?' },
-    { speaker: 'choi', text: ' 9시라니까?' },
-    { speaker: 'an', text: ' 아니 어쩌라고 그걸 누가 몰라...' },
-    { speaker: 'an', text: ' 아 암튼 무섭다...' },
-    { speaker: 'choi', text: ' 여기서 네 손 잡고 같이 가줄까? ‘무서워요 태민쌤~’ 이럴 거야?' },
-    { speaker: 'an', text: ' 아 알겠어... 미안해...' },
-    { speaker: 'choi', text: ' 그래, 일단 우리 쉼터 가볼까?' },
-    { speaker: 'an', text: ' 쉼터는 왜...?' },
+    { speaker: 'choi', text: ' 멍청아... 밤이니까 어둡지...' },
+    { speaker: 'an', text: ' 헤헷...' },
+    { speaker: 'choi', text: ' 헤헷?' },
+    { speaker: 'an', text: ' 미안...' },
+    { speaker: 'choi', text: ' 그래, 일단 반을 가볼까?' },
+    { speaker: 'an', text: ' 빨리 갔다가 나오자...' },
+    { speaker: 'choi', text: ' ?!' },
+    { speaker: 'choi2', text: ' 방금... 뭐였어?' },
+    { speaker: 'an', text: ' 뭐라는 거야 무섭게...' },
+    { speaker: 'choi', text: ' 방금 창문이...' },
+    { speaker: 'an', text: ' 진짜 장난 치지마라...' },
+    { speaker: 'choi', text: ' 쉼터쪽으로 가볼까..?' },
+    { speaker: 'an', text: ' 아니 무섭게 왜 쉼터로 가 ㅠㅠ' },
+    { speaker: 'an', text: ' 그냥 반이나 빨리 들리자고...' },
+    { speaker: 'choi', text: ' 쉼터 창문으로 밖에 볼라고...' },
+    { speaker: 'choi', text: ' 그럼 나는 쉼터 한 번 볼게, 너는 반 갔다 올래..?' },
+    { speaker: 'an', text: ' 혼자 가는 거 싫어... 그냥 같이 가자...' },
 ];
 
 function Page5() {
@@ -31,6 +35,7 @@ function Page5() {
     const [fadeIn, setFadeIn] = useState(false);
     const [showSceneText, setShowSceneText] = useState(false);
     const [showTxtBox, setShowTxtBox] = useState(false);
+    const [bgClass, setBgClass] = useState('bg3-1'); // 기본 배경 클래스
 
     const [currentIndex, setCurrentIndex] = useState(0);
     const [displayText, setDisplayText] = useState('');
@@ -61,7 +66,14 @@ function Page5() {
             setDisplayText('');
             setTyping(true);
 
-            // 기존 interval 제거 (혹시 모를 중복 방지)
+            // ✅ 배경 전환 효과 (choi2 나오기 직전)
+            if (currentIndex === 8) {
+                setBgClass('bg3-1-flash');
+                setTimeout(() => {
+                    setBgClass('bg3-1');
+                }, 750); // 0.5초 뒤 원래대로
+            }
+
             if (intervalRef.current) {
                 clearInterval(intervalRef.current);
             }
@@ -95,16 +107,12 @@ function Page5() {
         if (currentIndex < dialogues.length - 1) {
             setCurrentIndex(prev => prev + 1);
         } else {
-            setShowChoices(true); // 대화 끝나면 선택지 보이기!
+            navigate('/web-game/page6');
         }
     };
 
-    const l = () => navigate('/web-game/page5/left');
-    const c = () => navigate('/web-game/page5/canter');
-    const r = () => navigate('/web-game/page5/right');
-
     return (
-        <div className={`page-container bg3-1 ${fadeIn ? 'fade-in' : ''}`}>
+        <div className={`page-container ${bgClass} ${fadeIn ? 'fade-in' : ''}`}>
             <Menu />
             {showSceneText && <div className="scene-text">- 3층 -</div>}
 
@@ -120,26 +128,18 @@ function Page5() {
                     )}
                 </div>
                 <div className="right">
-                    {!showChoices ? (
-                        <>
-                            <div className="top">
-                                <h3 className='an' style={{ display: speaker === 'an' || speaker === 'an2' ? 'block' : 'none' }}>안동근</h3>
-                                <h3 className='choi' style={{ display: speaker === 'choi' || speaker === 'choi2' ? 'block' : 'none' }}>최태민</h3>
-                            </div>
-                            <div className="bottom">
-                                <p className='an' style={{ display: speaker === 'an' || speaker === 'an2' ? 'block' : 'none' }}>{displayText}</p>
-                                <p className='choi' style={{ display: speaker === 'choi' || speaker === 'choi2' ? 'block' : 'none' }}>{displayText}</p>
-                            </div>
-                        </>
-                    ) : (
-                        <div className="choice-container">
-                            <button className="choice-btn" onClick={l}>왼쪽으로 가기</button>
-                            <button className="choice-btn" onClick={c}>쉼터로 가기</button>
-                            <button className="choice-btn" onClick={r}>오른쪽으로 가기</button>
-                        </div>
-                    )}
+                    <div className="top">
+                        <h3 className='an' style={{ display: speaker === 'an' || speaker === 'an2' ? 'block' : 'none' }}>안동근</h3>
+                        <h3 className='choi' style={{ display: speaker === 'choi' || speaker === 'choi2' ? 'block' : 'none' }}>최태민</h3>
+                    </div>
+                    <div className="bottom">
+                        <p className='an' style={{ display: speaker === 'an' || speaker === 'an2' ? 'block' : 'none' }}>{displayText}</p>
+                        <p className='choi' style={{ display: speaker === 'choi' || speaker === 'choi2' ? 'block' : 'none' }}>{displayText}</p>
+                    </div>
                 </div>
             </div>
+
+            <AutoButton isTypingDone={!typing} onAutoNext={handleClick} />
         </div>
     );
 }

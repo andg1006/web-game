@@ -1,3 +1,7 @@
 .bg3-1{
     background-image: url('/public/back-images/3/bg1.png');
 }
+
+.bg3-1-flash {
+    background-image: url('/public/back-images/3/bg1-1.png');
+}

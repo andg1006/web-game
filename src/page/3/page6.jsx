@@ -5,37 +5,37 @@ import Menu from '../../navbar/menu';
 import '../css/page-def.css';
 import '../css/back-img3.css';
 
-// 교무실 둘러보기
+// 학교 앞
 
 const dialogues = [
-    { speaker: 'an', text: ' 역시 계단은 힘들다...' },
-    { speaker: 'an', text: ' 여긴... 왜 이렇게 어두워?' },
-    { speaker: 'choi', text: ' 멍청아... 밤이니까 어둡지...' },
-    { speaker: 'an', text: ' 헤헷...' },
-    { speaker: 'choi', text: ' 헤헷?' },
-    { speaker: 'an', text: ' 미안...' },
-    { speaker: 'choi', text: ' 그래, 일단 반을 가볼까?' },
-    { speaker: 'an', text: ' 빨리 갔다가 나오자...' },
-    { speaker: 'an', text: ' ?!' },
-    { speaker: 'choi', text: ' ?!' },
-    { speaker: 'choi', text: ' 방금... 뭐였...' },
-    { speaker: 'an2', text: ' 으아아악!!!' },
-    { speaker: 'choi2', text: ' 야...야!! 어디가!!' },
+    { speaker: 'choi', text: ' 원래 이 시간에 불이 켜져 있었냐..?' },
+    { speaker: 'an', text: ' 몰라?' },
+    { speaker: 'choi', text: ' 야, 지금 몇 시야?' },
+    { speaker: 'an', text: ' 몰라?' },
+    { speaker: 'choi', text: ' ...?' },
+    { speaker: 'an', text: ' ...?' },
+    { speaker: 'choi', text: ' 뭐만 하면 모른데, 미친 거냐?' },
+    { speaker: 'an', text: ' 모를 수도 있지...' },
+    { speaker: 'an', text: ' 지금이... 9시네!' },
+    { speaker: 'choi', text: ' 오키, 학교 불 켜져 있을 때 빨리 들어갔다 오자' },
+    { speaker: 'an', text: ' 야, 근데... 너무 무서운 거 아니야?' },
+    { speaker: 'choi', text: ' 야ㅡㅡ 9시니까 무서워 보이는 거야' },
+    { speaker: 'choi', text: ' 너 빨리 안 오면 먼저 들어간다?' },
+    { speaker: 'an', text: ' 아... 같이가!!' },
 ];
 
-function Page4_2() {
+function Page6() {
     const navigate = useNavigate();
 
     const [fadeIn, setFadeIn] = useState(false);
     const [showSceneText, setShowSceneText] = useState(false);
     const [showTxtBox, setShowTxtBox] = useState(false);
-    const [bgClass, setBgClass] = useState('bg3-1'); // 기본 배경 클래스
 
     const [currentIndex, setCurrentIndex] = useState(0);
     const [displayText, setDisplayText] = useState('');
     const [typing, setTyping] = useState(false);
 
-    const [showChoices, setShowChoices] = useState(false); // 선택지 표시 여부
+    const [isTypingDone, setIsTypingDone] = useState(false); // 현재 대사 출력 완료 여부
 
     const currentDialogue = dialogues[currentIndex];
     const speaker = currentDialogue?.speaker;
@@ -60,14 +60,7 @@ function Page4_2() {
             setDisplayText('');
             setTyping(true);
 
-            // ✅ 배경 전환 효과 (choi2 나오기 직전)
-            if (currentIndex === 8) {
-                setBgClass('bg3-1-flash');
-                setTimeout(() => {
-                    setBgClass('bg3-1');
-                }, 750); // 0.5초 뒤 원래대로
-            }
-
+            // 기존 interval 제거 (혹시 모를 중복 방지)
             if (intervalRef.current) {
                 clearInterval(intervalRef.current);
             }
@@ -77,6 +70,7 @@ function Page4_2() {
                     clearInterval(intervalRef.current);
                     intervalRef.current = null;
                     setTyping(false);
+                    setIsTypingDone(true); // ✅ 자동진행 조건
                     return;
                 }
                 setDisplayText(prev => prev + currentDialogue.text.charAt(i));
@@ -95,47 +89,43 @@ function Page4_2() {
             }
             setDisplayText(currentDialogue.text);
             setTyping(false);
+            setIsTypingDone(true); // 수동 클릭도 완료 상태로 간주
             return;
         }
 
         if (currentIndex < dialogues.length - 1) {
             setCurrentIndex(prev => prev + 1);
+            setIsTypingDone(false); // ✅ 초기화 필수!
         } else {
-            navigate('/web-game/page4/page2');
+            navigate('/web-game/page2');
         }
     };
 
     return (
-        <div className={`page-container ${bgClass} ${fadeIn ? 'fade-in' : ''}`}>
+        <div className={`page-container bg1 ${fadeIn ? 'fade-in' : ''}`}>
             <Menu />
-            {showSceneText && <div className="scene-text">- 3층 -</div>}
+            {showSceneText && <div className="scene-text">- 학교 앞 -</div>}
 
             <div className={`txt-box ${showTxtBox ? 'fade-in' : ''}`} onClick={handleClick}>
                 <div className="left">
-                    {!showChoices && (
-                        <>
-                            <img className='an' src={import.meta.env.BASE_URL + "images/an1.png"} style={{ display: speaker === 'an' ? 'block' : 'none' }} />
-                            <img className='an' src={import.meta.env.BASE_URL + "images/an2.png"} style={{ display: speaker === 'an2' ? 'block' : 'none' }} />
-                            <img className='choi' src={import.meta.env.BASE_URL + "images/choi1.png"} style={{ display: speaker === 'choi' ? 'block' : 'none' }} />
-                            <img className='choi' src={import.meta.env.BASE_URL + "images/choi2.png"} style={{ display: speaker === 'choi2' ? 'block' : 'none' }} />
-                        </>
-                    )}
+                    <img className='an' src={import.meta.env.BASE_URL + "images/an1.png"} style={{ display: speaker === 'an' ? 'block' : 'none' }} />
+                    <img className='choi' src={import.meta.env.BASE_URL + "images/choi1.png"} style={{ display: speaker === 'choi' ? 'block' : 'none' }} />
                 </div>
                 <div className="right">
                     <div className="top">
-                        <h3 className='an' style={{ display: speaker === 'an' || speaker === 'an2' ? 'block' : 'none' }}>안동근</h3>
-                        <h3 className='choi' style={{ display: speaker === 'choi' || speaker === 'choi2' ? 'block' : 'none' }}>최태민</h3>
+                        <h3 className='an' style={{ display: speaker === 'an' ? 'block' : 'none' }}>안동근</h3>
+                        <h3 className='choi' style={{ display: speaker === 'choi' ? 'block' : 'none' }}>최태민</h3>
                     </div>
                     <div className="bottom">
-                        <p className='an' style={{ display: speaker === 'an' || speaker === 'an2' ? 'block' : 'none' }}>{displayText}</p>
-                        <p className='choi' style={{ display: speaker === 'choi' || speaker === 'choi2' ? 'block' : 'none' }}>{displayText}</p>
+                        <p className='an' style={{ display: speaker === 'an' ? 'block' : 'none' }}>{displayText}</p>
+                        <p className='choi' style={{ display: speaker === 'choi' ? 'block' : 'none' }}>{displayText}</p>
                     </div>
                 </div>
             </div>
 
-            <AutoButton isTypingDone={!typing} onAutoNext={handleClick} />
+            <AutoButton isTypingDone={isTypingDone} onAutoNext={handleClick} />
         </div>
     );
 }
 
-export default Page4_2;
+export default Page6;

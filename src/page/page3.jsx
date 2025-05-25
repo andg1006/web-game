@@ -18,6 +18,7 @@ function Page3() {
     const navigate = useNavigate();
 
     const [fadeIn, setFadeIn] = useState(false);
+    const [bgClass, setBgClass] = useState('bg3'); // ✅ 배경 클래스 상태
     const [showSceneText, setShowSceneText] = useState(false);
     const [showTxtBox, setShowTxtBox] = useState(false);
 
@@ -31,7 +32,16 @@ function Page3() {
     const location = useLocation();
 
     useEffect(() => {
-        setTimeout(() => setFadeIn(true), 100);
+        setTimeout(() => {
+            setFadeIn(true); // 페이드인 시작
+        }, 100);
+
+        // ✅ 페이드인 끝난 후 0.5초 뒤에 배경 변경
+        setTimeout(() => {
+            setBgClass('bg3-after');
+        }, 100 + 1500); // 페이드인 시간(2초 예상) + 0.5초
+        // 혹은 정확히 fade-in css duration 고려해서 값 조정!
+        
         setTimeout(() => setShowTxtBox(true), 0.001);
     }, []);
 
@@ -39,14 +49,12 @@ function Page3() {
         localStorage.setItem('prevPage', location.pathname);
     }, []);
 
-    // 타이핑 효과
     useEffect(() => {
         if (showTxtBox && currentDialogue) {
             let i = 0;
             setDisplayText('');
             setTyping(true);
 
-            // 기존 interval 제거 (혹시 모를 중복 방지)
             if (intervalRef.current) {
                 clearInterval(intervalRef.current);
             }
@@ -80,13 +88,12 @@ function Page3() {
         if (currentIndex < dialogues.length - 1) {
             setCurrentIndex(prev => prev + 1);
         } else {
-            // 마지막 대사 끝났을 때 page2로 이동!
             navigate('/web-game/page4');
         }
     };
 
     return (
-        <div className={`page-container bg3 ${fadeIn ? 'fade-in' : ''}`}>
+        <div className={`page-container ${bgClass} ${fadeIn ? 'fade-in' : ''}`}>
             <Menu />
             {showSceneText && <div className="scene-text">- 계단 -</div>}
 
@@ -106,6 +113,7 @@ function Page3() {
                     </div>
                 </div>
             </div>
+
             <AutoButton isTypingDone={!typing} onAutoNext={handleClick} />
         </div>
     );

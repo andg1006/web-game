@@ -3,9 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { useState, } from 'react';
 import './Home.css';
 
+import RankingBoard from './RankingBoard';
 import Rule from './modal/rule/Rule';
 import Setting_menu from './navbar/setting_menu';
 import Start from './modal/start/start';
+import Ranking from './modal/ranking/Ranking'; // ✅ import 추가
 
 function Home() {
   const [isRuleOpen, setIsRuleOpen] = useState(false);
@@ -14,6 +16,7 @@ function Home() {
 
   const navigate = useNavigate();
   const [isStartOpen, setIsStartOpen] = useState(false);
+  const [isRankingOpen, setIsRankingOpen] = useState(false);
 
   const handleStartClick = () => {
     const savedPage = localStorage.getItem('prevPage');
@@ -44,8 +47,12 @@ function Home() {
             <ul className="menu">
               <li><button onClick={handleStartClick}>게임 시작</button></li>
               <li><button onClick={RuleOpen}>게임 설명</button></li>
+              <li><button onClick={() => setIsRankingOpen(true)}>🏆 랭킹 보기</button></li>
             </ul>
           </div>
+          <Ranking RankingOpen={isRankingOpen} RankingClose={() => setIsRankingOpen(false)}>
+            <RankingBoard />
+          </Ranking>
         </div>
         <Start
           StartOpen={isStartOpen}

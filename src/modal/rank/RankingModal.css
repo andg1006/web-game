@@ -1,0 +1,25 @@
+.ranking-modal {
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: black;
+  color: white;
+  border: 3px solid white;
+  padding: 30px;
+  border-radius: 15px;
+  z-index: 9999;
+  text-align: center;
+}
+.ranking-modal input {
+  margin: 10px 0;
+  padding: 7px;
+  font-size: 16px;
+}
+.btn-group button {
+  margin: 10px 15px;
+  padding: 10px 20px;
+  font-size: 16px;
+
+  color: white;
+}

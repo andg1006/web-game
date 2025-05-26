@@ -5,6 +5,9 @@ import Menu from '../../navbar/menu';
 import '../css/page-def.css';
 import '../css/back-img3.css';
 
+import RankingModal from '../../modal/rank/RankingModal';
+import { saveRanking } from '../../utils/saveRanking';
+
 const dialogues = [
     { speaker: 'an', text: ' 어쩌다가 들어왔는데...' },
     { speaker: 'choi', text: ' 서랍이나 사물함을 보면...' },
@@ -32,6 +35,9 @@ function Page9_2_1() {
     const [showEndText, setShowEndText] = useState(false); // - END - 텍스트
 
     const [showChoices, setShowChoices] = useState(false); // 선택지 표시 여부
+
+    const [showRankingModal, setShowRankingModal] = useState(false);
+    const [finalScore] = useState(110); // 점수는 상황에 맞게 변경 가능
 
     const [currentIndex, setCurrentIndex] = useState(0);
     const [displayText, setDisplayText] = useState('');
@@ -117,11 +123,10 @@ function Page9_2_1() {
 
             setTimeout(() => {
                 setShowEndText(true); // - END - 문구 등장
-            }, 1500); // 어둡게 된 후 1.5초 뒤
-
-            setTimeout(() => {
-                navigate('/web-game'); // 홈으로 이동
-            }, 6000); // - END - 등장 후 2초 뒤
+                setTimeout(() => {
+                    setShowRankingModal(true); // ✅ 랭킹 모달 등장
+                }, 1500);
+            }, 1500);
         }
     };
 
@@ -166,6 +171,17 @@ function Page9_2_1() {
                     </div>
                 </div>
             </div>
+            {showRankingModal && (
+                <RankingModal
+                    score={finalScore}
+                    onRegister={(name) => {
+                        saveRanking(name, finalScore);
+                        navigate('/web-game/');
+                    }}
+                    onCancel={() => navigate('/web-game/')}
+                />
+            )}
+
             <AutoButton isTypingDone={!typing} onAutoNext={handleClick} />
         </div>
     );

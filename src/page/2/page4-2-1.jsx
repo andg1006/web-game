@@ -4,6 +4,8 @@ import AutoButton from '../../button/AutoButton'; // ✅ 오토버튼 import 추
 import Menu from '../../navbar/menu';
 import '../css/page-def.css';
 import '../css/back-img.css';
+import RankingModal from '../../modal/rank/RankingModal';
+import { saveRanking } from '../../utils/saveRanking';
 
 const dialogues = [
     { speaker: 'an2', text: ' 헉...헉...' },
@@ -45,6 +47,9 @@ function Page4_2_1() {
     const speaker = currentDialogue?.speaker;
     const intervalRef = useRef(null);
     const location = useLocation();
+
+    const [showRankingModal, setShowRankingModal] = useState(false);
+    const [finalScore] = useState(100); // 점수는 원하는 값으로 조정해도 돼
 
     useEffect(() => {
         setTimeout(() => setFadeIn(true), 100);
@@ -102,15 +107,14 @@ function Page4_2_1() {
             setCurrentIndex(prev => prev + 1);
         } else {
             // ✅ 대사 다 끝났을 때 종료 연출 시작
-            setEndSequence(true); // 화면 어둡게 전환
+            setEndSequence(true);
 
             setTimeout(() => {
                 setShowEndText(true); // - END - 문구 등장
-            }, 1500); // 어둡게 된 후 1.5초 뒤
-
-            setTimeout(() => {
-                navigate('/web-game'); // 홈으로 이동
-            }, 6000); // - END - 등장 후 2초 뒤
+                setTimeout(() => {
+                    setShowRankingModal(true); // ✅ 랭킹 모달 띄우기
+                }, 1500);
+            }, 1500);
         }
     };
 
@@ -152,6 +156,17 @@ function Page4_2_1() {
                     </div>
                 </div>
             </div>
+            {showRankingModal && (
+                <RankingModal
+                    score={finalScore}
+                    onRegister={(name) => {
+                        saveRanking(name, finalScore);
+                        navigate('/web-game');
+                    }}
+                    onCancel={() => navigate('/web-game')}
+                />
+            )}
+
             <AutoButton isTypingDone={!typing} onAutoNext={handleClick} />
         </div>
     );

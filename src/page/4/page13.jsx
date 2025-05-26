@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from 'react';
 import AutoButton from '../../button/AutoButton'; // ✅ 오토버튼 import 추가
 import Menu from '../../navbar/menu';
 import '../css/page-def.css';
-import '../css/back-img3.css';
+import '../css/back-img4.css';
 
 // 교무실 둘러보기
 
@@ -26,8 +26,13 @@ const dialogues = [
     
     { speaker: 'all', text: ' ...!' },
     { speaker: '???', text: ' 이상하다.. 분명 소리가 들렸는데...' },
-    { speaker: 'kim', text: ' ㅇ..이제 간거같아...' },
-    { speaker: 'an2', text: ' 바...방금 뭐야...?' },
+    { speaker: 'kim', text: ' 이제 간거같아...' },
+    { speaker: 'all', text: ' 바...방금 뭐야...?' },
+    { speaker: 'kim', text: ' 경비원이신가...' },
+    { speaker: 'choi', text: ' 우리 학교에 경비가 있었나..?' },
+    { speaker: 'an', text: ' 몰라 ㅠㅠ 얼른 반 찾아서 나가자 ㅠㅠ' },
+    { speaker: 'kim', text: ' 내가 한 번 밖에 살펴볼게' },
+    { speaker: 'kim', text: ' 오케이, 나와도 될 것같아' },
 ];
 
 function Page12() {
@@ -54,9 +59,20 @@ function Page12() {
         sfx.volume = 0.6;
         sfx.play().catch((err) => console.warn('🎵 효과음 재생 실패:', err));
     };
+    const playSfx2 = (filename) => {
+        const sfx = new Audio(import.meta.env.BASE_URL + `sounds/${filename}`);
+        sfx.volume = 1;
+        sfx.play().catch((err) => console.warn('🎵 효과음 재생 실패:', err));
+    };
     useEffect(() => {
         if (currentIndex === 15 - 1) {
             playSfx('door-knock.mp3');
+        }
+        if (currentIndex === 16 - 1) {
+            playSfx('open-door.mp3');
+        }
+        if (currentIndex === 17 - 1) {
+            playSfx2('work.mp3');
         }
     }, [currentIndex]);
 

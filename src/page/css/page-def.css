@@ -178,6 +178,7 @@
     cursor: pointer;
     transition: opacity 0.5s ease;
 }
+
 .click-target3 {
     position: absolute;
     top: 580px;
@@ -190,6 +191,7 @@
     cursor: pointer;
     transition: opacity 0.5s ease;
 }
+
 .click-target-1 {
     position: absolute;
     top: 53%;
@@ -331,13 +333,34 @@
     0% {
         opacity: 0;
     }
+
     50% {
         opacity: 1;
     }
+
     80% {
         opacity: 1;
     }
+
     100% {
         opacity: 0;
     }
+}
+
+.scary-image {
+    top: 50%;
+    left: 50%;
+    width: 600px;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+}
+
+.scary-image.fade-in {
+    opacity: 1;
+}
+
+.scary-image.fade-out {
+
+    transition: 0.5s;
+    opacity: 0;
 }

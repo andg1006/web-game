@@ -31,6 +31,7 @@ import Page10 from './page/3/page10';
 import Page11 from './page/4/page11';
 import Page12 from './page/4/page12';
 import Page13 from './page/4/page13';
+import Page14 from './page/4/page14';
 
 function App() {
   const bgmPlayerRef = useRef();
@@ -87,6 +88,7 @@ function App() {
         <Route path="/web-game/page11" element={<Page11 />} />
         <Route path="/web-game/page12" element={<Page12 />} />
         <Route path="/web-game/page13" element={<Page13 />} />
+        <Route path="/web-game/page14" element={<Page14 />} />
 
       </Routes>
     </>

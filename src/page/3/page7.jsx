@@ -13,7 +13,7 @@ const dialogues = [
     { speaker: 'an', text: ' 종이에 뭐라고 써있는지 볼까...?' },
     { speaker: 'sys', text: ' 종이를 클릭' },
 
-    { speaker: 'an2', text: ' 으악!!' },
+    { speaker: 'all', text: ' 으아아악!!!!!' },
     { speaker: 'choi2', text: ' ㅈ..저게 뭐야...' },
     { speaker: 'an2', text: ' 우리 그냥 과제 버릴까..?' },
     { speaker: 'an2', text: ' 이거 너무 불안해서 더 못 가겠는데..' },
@@ -41,6 +41,18 @@ function page7() {
     const speaker = currentDialogue?.speaker;
     const intervalRef = useRef(null);
     const location = useLocation();
+
+    const playSfx = (filename) => {
+        const sfx = new Audio(import.meta.env.BASE_URL + `sounds/${filename}`);
+        sfx.volume = 0.6;
+        sfx.play().catch((err) => console.warn('🎵 효과음 재생 실패:', err));
+    };
+    useEffect(() => {
+        if (currentIndex === 5 - 1) {
+            playSfx('Scream2.mp3');
+            playSfx('Scream.mp3');
+        }
+    }, [currentIndex]);
 
     useEffect(() => {
         setTimeout(() => setFadeIn(true), 100);
@@ -140,17 +152,20 @@ function page7() {
                     <img className='an' src={import.meta.env.BASE_URL + "images/an2.png"} style={{ display: speaker === 'an2' ? 'block' : 'none' }} />
                     <img className='choi' src={import.meta.env.BASE_URL + "images/choi1.png"} style={{ display: speaker === 'choi' ? 'block' : 'none' }} />
                     <img className='choi' src={import.meta.env.BASE_URL + "images/choi2.png"} style={{ display: speaker === 'choi2' ? 'block' : 'none' }} />
+                    <img className='choi' src={import.meta.env.BASE_URL + "images/all2.png"} style={{ display: speaker === 'all' ? 'block' : 'none' }} />
                     <img className='sys' src={import.meta.env.BASE_URL + "images/.png"} style={{ display: speaker === 'sys' ? 'block' : 'none' }} />
                 </div>
                 <div className="right">
                     <div className="top">
                         <h3 className='an' style={{ display: speaker === 'an' || speaker === 'an2' ? 'block' : 'none' }}>안동근</h3>
                         <h3 className='choi' style={{ display: speaker === 'choi' || speaker === 'choi2' ? 'block' : 'none' }}>최태민</h3>
+                        <h3 className='choi' style={{ display: speaker === 'all' ? 'block' : 'none' }}>안동근 / 최태민</h3>
                         <h3 className='sys' style={{ display: speaker === 'sys' ? 'block' : 'none' }}></h3>
                     </div>
                     <div className="bottom">
                         <p className='an' style={{ display: speaker === 'an' || speaker === 'an2' ? 'block' : 'none' }}>{displayText}</p>
                         <p className='choi' style={{ display: speaker === 'choi' || speaker === 'choi2' ? 'block' : 'none' }}>{displayText}</p>
+                        <p className='choi' style={{ display: speaker === 'all' ? 'block' : 'none' }}>{displayText}</p>
                         <p className='sys' style={{ display: speaker === 'sys' ? 'block' : 'none' }}>{displayText}</p>
                     </div>
                 </div>

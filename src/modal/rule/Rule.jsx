@@ -13,7 +13,9 @@ function Rule({ RuleOpen, RuleClose }) {
                     <br />
                     <li>이 게임은 비주얼 노벨, 공포 장르입니다.</li>
                     <li>이 게임은 반응형을 지원하지 않습니다.</li>
+                    <li>이 게임은 아직 개발 단계이며 불편한 오류가 많습니다.</li>
                     <br />
+                    <li style={{ fontSize: '18px', color: 'red' }}>※게임 중에 나오는 bgm은 새로고침을 하면 bgm에 오류가 발생합니다.※</li>
                     <li style={{ fontSize: '18px', color: 'red' }}>※이 게임은 점프 스케어가 있습니다.※</li>
                     <li style={{ fontSize: '18px', color: 'red' }}>※이미지와 내용은 실제와 다를 수 있습니다.※</li>
                 </ul>

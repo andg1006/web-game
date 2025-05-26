@@ -8,25 +8,35 @@ import '../css/back-img3.css';
 // 교무실 둘러보기
 
 const dialogues = [
-    { speaker: 'an', text: ' 우리 반은 어디에 있을까?' },
-    { speaker: 'choi', text: ' 그러게... 우리반은 어디에 있...' },
-
-    { speaker: 'choi2', text: ' 으악!!!' },
-    { speaker: 'choi2', text: ' 방금 귀..귀신이...' },
-    { speaker: 'an', text: ' 야, 진짜 나 겁 많다고 놀리는 거지..?' },
-    { speaker: 'choi2', text: ' ㅇ..아니 방금 ㄱ..귀신이...' },
-    { speaker: 'an2', text: ' 진짜 장난 치지마..! 우리 저 끝까지 가야한다고...' },
-    { speaker: 'choi2', text: ' 우리 4층 먼저 확인하자... 또 귀신이 나올까봐 불안해...' },
-    { speaker: 'an2', text: ' 그래, 4층 먼저 갔다 오자...' },
+    { speaker: 'choi', text: ' 그래서 여기 온 이유가 뭐라고?' },
+    { speaker: 'kim', text: ' 나 학교에 놓고 온 물건이 있어서 왔지...' },
+    { speaker: 'kim', text: ' 너희는 왜 여기있어?' },
+    { speaker: 'choi', text: ' 우리도 놓고 온 물건이 있어서...' },
+    { speaker: 'an', text: ' 근데 왜 너 여기 있어? 여기는 다른 반인데...' },
+    { speaker: 'choi', text: ' 너도 설마 반이 바뀌어서 반 찾고있어?' },
+    { speaker: 'kim', text: ' 어? 어떻게 알았어? 반 바뀌어서 찾고 있었는데...' },
+    { speaker: 'kim', text: ' 갑자기 귀신이 나타나서 무서워서 일단 여기로 오긴 했는데' },
+    { speaker: 'kim', text: ' 설마 너희도 귀신 봤어?' },
+    { speaker: 'choi', text: ' 나는 봤는데 동근이는 못봤나봐' },
+    { speaker: 'an', text: ' 일단 지금 여기 이상해... 괴이한 현상이 계속 일어나...' },
+    { speaker: 'kim', text: ' 우리 얼른 반 찾아서 물건 챙기고 나가자' },
+    { speaker: 'choi', text: ' 일단 4층 절반은 찾아 봤는데 없었어' },
+    { speaker: 'kim', text: ' 그럼 4층 복도 끝쪽 확인하고 내려가면 되겠다' },
+    { speaker: 'choi', text: ' 그래, 얼른...' },
+    
+    { speaker: 'all', text: ' ...!' },
+    { speaker: '???', text: ' 이상하다.. 분명 소리가 들렸는데...' },
+    { speaker: 'kim', text: ' ㅇ..이제 간거같아...' },
+    { speaker: 'an2', text: ' 바...방금 뭐야...?' },
 ];
 
-function Page10() {
+function Page12() {
     const navigate = useNavigate();
 
     const [fadeIn, setFadeIn] = useState(false);
     const [showSceneText, setShowSceneText] = useState(false);
     const [showTxtBox, setShowTxtBox] = useState(false);
-    const [bgClass, setBgClass] = useState('bg3-8'); // 기본 배경 클래스
+    const [bgClass, setBgClass] = useState('bg4-3'); // 기본 배경 클래스
 
     const [currentIndex, setCurrentIndex] = useState(0);
     const [displayText, setDisplayText] = useState('');
@@ -45,8 +55,8 @@ function Page10() {
         sfx.play().catch((err) => console.warn('🎵 효과음 재생 실패:', err));
     };
     useEffect(() => {
-        if (currentIndex === 3 - 1) {
-            playSfx('Scream2.mp3');
+        if (currentIndex === 15 - 1) {
+            playSfx('door-knock.mp3');
         }
     }, [currentIndex]);
 
@@ -67,14 +77,6 @@ function Page10() {
             let i = 0;
             setDisplayText('');
             setTyping(true);
-
-            // ✅ 배경 전환 효과 (choi2 나오기 직전)
-            if (currentIndex === 2) {
-                setBgClass('bg3-8-flash');
-                setTimeout(() => {
-                    setBgClass('bg3-8');
-                }, 500); // 0.5초 뒤 원래대로
-            }
 
             if (intervalRef.current) {
                 clearInterval(intervalRef.current);
@@ -109,14 +111,14 @@ function Page10() {
         if (currentIndex < dialogues.length - 1) {
             setCurrentIndex(prev => prev + 1);
         } else {
-            navigate('/web-game/page11');
+            navigate('/web-game/page14');
         }
     };
 
     return (
         <div className={`page-container ${bgClass} ${fadeIn ? 'fade-in' : ''}`}>
             <Menu />
-            {showSceneText && <div className="scene-text">- 3층 오른쪽 복도 끝 -</div>}
+            {showSceneText && <div className="scene-text">- 4층 어느 반 -</div>}
 
             <div className={`txt-box ${showTxtBox ? 'fade-in' : ''}`} onClick={handleClick}>
                 <div className="left">
@@ -126,6 +128,9 @@ function Page10() {
                             <img className='an' src={import.meta.env.BASE_URL + "images/an2.png"} style={{ display: speaker === 'an2' ? 'block' : 'none' }} />
                             <img className='choi' src={import.meta.env.BASE_URL + "images/choi1.png"} style={{ display: speaker === 'choi' ? 'block' : 'none' }} />
                             <img className='choi' src={import.meta.env.BASE_URL + "images/choi2.png"} style={{ display: speaker === 'choi2' ? 'block' : 'none' }} />
+                            <img className='choi' src={import.meta.env.BASE_URL + "images/.png"} style={{ display: speaker === '???' ? 'block' : 'none' }} />
+                            <img className='choi' src={import.meta.env.BASE_URL + "images/kim.png"} style={{ display: speaker === 'kim' ? 'block' : 'none' }} />
+                            <img className='choi' src={import.meta.env.BASE_URL + "images/all2.png"} style={{ display: speaker === 'all' ? 'block' : 'none' }} />
                         </>
                     )}
                 </div>
@@ -133,10 +138,16 @@ function Page10() {
                     <div className="top">
                         <h3 className='an' style={{ display: speaker === 'an' || speaker === 'an2' ? 'block' : 'none' }}>안동근</h3>
                         <h3 className='choi' style={{ display: speaker === 'choi' || speaker === 'choi2' ? 'block' : 'none' }}>최태민</h3>
+                        <h3 className='choi' style={{ display: speaker === '???' ? 'block' : 'none' }}>???</h3>
+                        <h3 className='choi' style={{ display: speaker === 'kim' ? 'block' : 'none' }}>김민선</h3>
+                        <h3 className='choi' style={{ display: speaker === 'all' ? 'block' : 'none' }}>안동근 / 최태민</h3>
                     </div>
                     <div className="bottom">
                         <p className='an' style={{ display: speaker === 'an' || speaker === 'an2' ? 'block' : 'none' }}>{displayText}</p>
                         <p className='choi' style={{ display: speaker === 'choi' || speaker === 'choi2' ? 'block' : 'none' }}>{displayText}</p>
+                        <p className='choi' style={{ display: speaker === '???' ? 'block' : 'none' }}>{displayText}</p>
+                        <p className='choi' style={{ display: speaker === 'kim' ? 'block' : 'none' }}>{displayText}</p>
+                        <p className='choi' style={{ display: speaker === 'all' ? 'block' : 'none' }}>{displayText}</p>
                     </div>
                 </div>
             </div>
@@ -146,4 +157,4 @@ function Page10() {
     );
 }
 
-export default Page10;
+export default Page12;

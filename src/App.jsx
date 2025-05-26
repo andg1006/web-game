@@ -1,7 +1,10 @@
-import { Routes, Route } from 'react-router-dom';
-import In_development from './page/In-development';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { useRef } from 'react';
 
 import Home from './Home';
+import In_development from './page/In-development';
+import BgmPlayer from './BgmPlayer';
+import BgmControl from './BgmControl';
 
 import Phone from './page/phone';
 import Page1 from './page/page1';
@@ -25,44 +28,68 @@ import Page9_2 from './page/3/page9-2';
 import Page9_2_1 from './page/3/page9-2-1';
 import Page10 from './page/3/page10';
 
-// import Page11 from './page/4/page11';
+import Page11 from './page/4/page11';
+import Page12 from './page/4/page12';
+import Page13 from './page/4/page13';
 
 function App() {
+  const bgmPlayerRef = useRef();
+  const location = useLocation(); // 현재 경로 확인
+
+  const isHiddenPage =
+    location.pathname === '/web-game/' || location.pathname.includes('/web-game/phone');
+
   return (
-    <Routes>
-      {/* 기타 */}
-      <Route path="/web-game/" element={<Home />} /> {/* 메인 */}
-      <Route path="/web-game/In-development" element={<In_development />} /> {/* 개발 중 */}
+    <>
+      <BgmPlayer ref={bgmPlayerRef} />
+      
+      {!isHiddenPage && (
+        <BgmControl
+          audioRef={
+            bgmPlayerRef.current?.getAudio
+              ? { current: bgmPlayerRef.current.getAudio() }
+              : { current: null }
+          }
+        />
+      )}
 
-      {/* 챕터 1 */}
-      <Route path="/web-game/phone" element={<Phone />} />
-      <Route path="/web-game/page1" element={<Page1 />} />
-      <Route path="/web-game/page2" element={<Page2 />} />
-      <Route path="/web-game/page3" element={<Page3 />} />
+      <Routes>
+        {/* 기타 */}
+        <Route path="/web-game/" element={<Home />} /> {/* 메인 */}
+        <Route path="/web-game/In-development" element={<In_development />} /> {/* 개발 중 */}
 
-      {/* 챕터 2 */}
-      <Route path="/web-game/page4" element={<Page4 />} />
-      <Route path="/web-game/page4/page1" element={<Page4_2 />} />
-      <Route path="/web-game/page4/page2" element={<Page4_2_1 />} />
-      <Route path="/web-game/page4/chapter" element={<Page4_1 />} />
-      <Route path="/web-game/page4/chapter1" element={<Chapter1 />} />
-      <Route path="/web-game/page4/chapter2" element={<Chapter2 />} />
-      <Route path="/web-game/page4/chapter3" element={<Chapter3 />} />
+        {/* 챕터 1 */}
+        <Route path="/web-game/phone" element={<Phone />} />
+        <Route path="/web-game/page1" element={<Page1 />} />
+        <Route path="/web-game/page2" element={<Page2 />} />
+        <Route path="/web-game/page3" element={<Page3 />} />
 
-      {/* 쳅터 3 */}
-      <Route path="/web-game/page5" element={<Page5 />} />
-      <Route path="/web-game/page6" element={<Page6 />} />
-      <Route path="/web-game/page7" element={<Page7 />} />
-      <Route path="/web-game/page8" element={<Page8 />} />
-      <Route path="/web-game/page9" element={<Page9 />} />
-      <Route path="/web-game/page9-2" element={<Page9_2 />} />
-      <Route path="/web-game/page9-2-1" element={<Page9_2_1 />} />
-      <Route path="/web-game/page10" element={<Page10 />} />
+        {/* 챕터 2 */}
+        <Route path="/web-game/page4" element={<Page4 />} />
+        <Route path="/web-game/page4/page1" element={<Page4_2 />} />
+        <Route path="/web-game/page4/page2" element={<Page4_2_1 />} />
+        <Route path="/web-game/page4/chapter" element={<Page4_1 />} />
+        <Route path="/web-game/page4/chapter1" element={<Chapter1 />} />
+        <Route path="/web-game/page4/chapter2" element={<Chapter2 />} />
+        <Route path="/web-game/page4/chapter3" element={<Chapter3 />} />
 
-      {/* 쳅터 4 */}
-      {/* <Route path="/web-game/page11" element={<Page11 />} /> */}
+        {/* 쳅터 3 */}
+        <Route path="/web-game/page5" element={<Page5 />} />
+        <Route path="/web-game/page6" element={<Page6 />} />
+        <Route path="/web-game/page7" element={<Page7 />} />
+        <Route path="/web-game/page8" element={<Page8 />} />
+        <Route path="/web-game/page9" element={<Page9 />} />
+        <Route path="/web-game/page9-2" element={<Page9_2 />} />
+        <Route path="/web-game/page9-2-1" element={<Page9_2_1 />} />
+        <Route path="/web-game/page10" element={<Page10 />} />
 
-    </Routes>
+        {/* 쳅터 4 */}
+        <Route path="/web-game/page11" element={<Page11 />} />
+        <Route path="/web-game/page12" element={<Page12 />} />
+        <Route path="/web-game/page13" element={<Page13 />} />
+
+      </Routes>
+    </>
   );
 }
 

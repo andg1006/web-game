@@ -12,10 +12,8 @@ const dialogues = [
     { speaker: 'an', text: ' 왜 우리 반 맞아?' },
     { speaker: 'choi2', text: ' 우리 반이 아니야... 진짜로 반이 옮겨졌나봐...' },
     { speaker: 'an2', text: ' 우리 빨리 여기 나가자...' },
-    { speaker: 'choi2', text: ' ...' },
-    { speaker: 'an2', text: ' ...' },
-    { speaker: 'choi2', text: ' 으아악!!!' },
-    { speaker: 'an2', text: ' 으아아악!!!' },
+    { speaker: 'all', text: ' ...' },
+    { speaker: 'all', text: ' 으아아악!!!!!' },
     { speaker: 'sys', text: ' 안동근과 최태민은 너무 놀라 기절했다.' },
 
     { speaker: 't', text: ' 으악!!' },
@@ -43,6 +41,18 @@ function Page9_2_1() {
     const speaker = currentDialogue?.speaker;
     const intervalRef = useRef(null);
     const location = useLocation();
+
+    const playSfx = (filename) => {
+        const sfx = new Audio(import.meta.env.BASE_URL + `sounds/${filename}`);
+        sfx.volume = 0.6;
+        sfx.play().catch((err) => console.warn('🎵 효과음 재생 실패:', err));
+    };
+    useEffect(() => {
+        if (currentIndex === 5 - 1) {
+            playSfx('Scream2.mp3');
+            playSfx('Scream.mp3');
+        }
+    }, [currentIndex]);
 
     useEffect(() => {
         setTimeout(() => setFadeIn(true), 100);
@@ -133,6 +143,7 @@ function Page9_2_1() {
                             <img className='an' src={import.meta.env.BASE_URL + "images/an2.png"} style={{ display: speaker === 'an2' ? 'block' : 'none' }} />
                             <img className='choi' src={import.meta.env.BASE_URL + "images/choi1.png"} style={{ display: speaker === 'choi' ? 'block' : 'none' }} />
                             <img className='choi' src={import.meta.env.BASE_URL + "images/choi2.png"} style={{ display: speaker === 'choi2' ? 'block' : 'none' }} />
+                            <img className='choi' src={import.meta.env.BASE_URL + "images/all2.png"} style={{ display: speaker === 'all' ? 'block' : 'none' }} />
                             <img className='choi' src={import.meta.env.BASE_URL + "images/.png"} style={{ display: speaker === 'sys' ? 'block' : 'none' }} />
                             <img className='choi' src={import.meta.env.BASE_URL + "images/.png"} style={{ display: speaker === 't' ? 'block' : 'none' }} />
                         </>
@@ -142,12 +153,14 @@ function Page9_2_1() {
                     <div className="top">
                         <h3 className='an' style={{ display: speaker === 'an' || speaker === 'an2' ? 'block' : 'none' }}>안동근</h3>
                         <h3 className='choi' style={{ display: speaker === 'choi' || speaker === 'choi2' ? 'block' : 'none' }}>최태민</h3>
+                        <h3 className='choi' style={{ display: speaker === 'all' ? 'block' : 'none' }}>안동근 / 최태민</h3>
                         <h3 className='choi' style={{ display: speaker === 'sys' ? 'block' : 'none' }}></h3>
                         <h3 className='choi' style={{ display: speaker === 't' ? 'block' : 'none' }}>선생님</h3>
                     </div>
                     <div className="bottom">
                         <p className='an' style={{ display: speaker === 'an' || speaker === 'an2' ? 'block' : 'none' }}>{displayText}</p>
                         <p className='choi' style={{ display: speaker === 'choi' || speaker === 'choi2' ? 'block' : 'none' }}>{displayText}</p>
+                        <p className='choi' style={{ display: speaker === 'all' ? 'block' : 'none' }}>{displayText}</p>
                         <p className='choi' style={{ display: speaker === 'sys' ? 'block' : 'none' }}>{displayText}</p>
                         <p className='choi' style={{ display: speaker === 't' ? 'block' : 'none' }}>{displayText}</p>
                     </div>

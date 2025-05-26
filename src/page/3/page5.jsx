@@ -16,7 +16,7 @@ const dialogues = [
     { speaker: 'an', text: ' 미안...' },
     { speaker: 'choi', text: ' 그래, 일단 반을 가볼까?' },
     { speaker: 'an', text: ' 빨리 갔다가 나오자...' },
-    { speaker: 'choi', text: ' ?!' },
+    { speaker: 'choi2', text: ' 으아아악!!!!!' },
     { speaker: 'choi2', text: ' 방금... 뭐였어?' },
     { speaker: 'an', text: ' 뭐라는 거야 무섭게...' },
     { speaker: 'choi', text: ' 방금 창문이...' },
@@ -47,6 +47,17 @@ function Page5() {
     const speaker = currentDialogue?.speaker;
     const intervalRef = useRef(null);
     const location = useLocation();
+
+    const playSfx = (filename) => {
+        const sfx = new Audio(import.meta.env.BASE_URL + `sounds/${filename}`);
+        sfx.volume = 0.6;
+        sfx.play().catch((err) => console.warn('🎵 효과음 재생 실패:', err));
+    };
+    useEffect(() => {
+        if (currentIndex === 9 - 1) {
+            playSfx('Scream2.mp3');
+        }
+    }, [currentIndex]);
 
     useEffect(() => {
         setTimeout(() => setFadeIn(true), 100);

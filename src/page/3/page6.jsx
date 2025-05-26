@@ -8,20 +8,10 @@ import '../css/back-img3.css';
 // 학교 앞
 
 const dialogues = [
-    { speaker: 'choi', text: ' 원래 이 시간에 불이 켜져 있었냐..?' },
-    { speaker: 'an', text: ' 몰라?' },
-    { speaker: 'choi', text: ' 야, 지금 몇 시야?' },
-    { speaker: 'an', text: ' 몰라?' },
-    { speaker: 'choi', text: ' ...?' },
-    { speaker: 'an', text: ' ...?' },
-    { speaker: 'choi', text: ' 뭐만 하면 모른데, 미친 거냐?' },
-    { speaker: 'an', text: ' 모를 수도 있지...' },
-    { speaker: 'an', text: ' 지금이... 9시네!' },
-    { speaker: 'choi', text: ' 오키, 학교 불 켜져 있을 때 빨리 들어갔다 오자' },
-    { speaker: 'an', text: ' 야, 근데... 너무 무서운 거 아니야?' },
-    { speaker: 'choi', text: ' 야ㅡㅡ 9시니까 무서워 보이는 거야' },
-    { speaker: 'choi', text: ' 너 빨리 안 오면 먼저 들어간다?' },
-    { speaker: 'an', text: ' 아... 같이가!!' },
+    { speaker: 'choi', text: ' 여기 은근 무서운데..?' },
+    { speaker: 'an', text: ' 불이 다 꺼져있으니까, 하나도 안보인다...' },
+    { speaker: 'an', text: ' 빨리 밖에 확인하고 반이나 가자...' },
+    { speaker: 'choi', text: ' 그래, 빨리 반이나 들리자' },
 ];
 
 function Page6() {
@@ -97,14 +87,14 @@ function Page6() {
             setCurrentIndex(prev => prev + 1);
             setIsTypingDone(false); // ✅ 초기화 필수!
         } else {
-            navigate('/web-game/page2');
+            navigate('/web-game/page7');
         }
     };
 
     return (
-        <div className={`page-container bg1 ${fadeIn ? 'fade-in' : ''}`}>
+        <div className={`page-container bg3-2 ${fadeIn ? 'fade-in' : ''}`}>
             <Menu />
-            {showSceneText && <div className="scene-text">- 학교 앞 -</div>}
+            {showSceneText && <div className="scene-text">- 쉼터 -</div>}
 
             <div className={`txt-box ${showTxtBox ? 'fade-in' : ''}`} onClick={handleClick}>
                 <div className="left">

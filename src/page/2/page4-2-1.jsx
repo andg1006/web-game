@@ -21,7 +21,7 @@ const dialogues = [
     { speaker: 'choi2', text: ' 으아아악!!!!!' },
 
     { speaker: '???', text: ' 선생님, 동근이랑 태민이는 왜 안와요?' },
-    { speaker: 't', text: ' 동근이랑 태민이는 당분간 못올거야.' },
+    { speaker: 't', text: ' 동근이랑 태민이는 당분간 학교에 못 올 거 같아요...' },
 ];
 
 function Page4_2_1() {
@@ -54,7 +54,7 @@ function Page4_2_1() {
     }, []);
 
     useEffect(() => {
-        localStorage.setItem('prevPage', location.pathname);
+        localStorage.setItem('prevPage', '/web-game/page4');
     }, []);
 
     // 타이핑 효과
@@ -118,7 +118,7 @@ function Page4_2_1() {
         <div className={`page-container ${bgClass} ${fadeIn ? 'fade-in' : ''}`}>
             {endSequence && (
                 <div className="blackout">
-                    {showEndText && <div className="end-text">- END -</div>}
+                    {showEndText && <div className="end-text">- GAME OVER -</div>}
                 </div>
             )}
             <Menu />
@@ -148,7 +148,7 @@ function Page4_2_1() {
                         <p className='an' style={{ display: speaker === 'an' || speaker === 'an2' ? 'block' : 'none' }}>{displayText}</p>
                         <p className='choi' style={{ display: speaker === 'choi' || speaker === 'choi2' ? 'block' : 'none' }}>{displayText}</p>
                         <p className='choi' style={{ display: speaker === '???' ? 'block' : 'none' }}>{displayText}</p>
-                        <p className='choi' style={{ display: speaker === 't' ? 'block' : 'none', color: 'red' }}>{displayText}</p>
+                        <p className='choi' style={{ display: speaker === 't' ? 'block' : 'none' }}>{displayText}</p>
                     </div>
                 </div>
             </div>

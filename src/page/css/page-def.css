@@ -189,6 +189,21 @@
     cursor: pointer;
     transition: opacity 0.5s ease;
 }
+.click-target-1 {
+    position: absolute;
+    top: 53%;
+    left: 930px;
+    width: 60px;
+    height: 40px;
+    z-index: 9999;
+    pointer-events: auto;
+    background-color: red;
+    opacity: 0.5;
+    transform: rotate(-10deg);
+    /* ← 요게 핵심!! */
+    cursor: pointer;
+    transition: opacity 0.5s ease;
+}
 
 @keyframes show {
     0% {

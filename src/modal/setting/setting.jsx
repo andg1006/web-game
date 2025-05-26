@@ -43,6 +43,16 @@ function Setting({ SettingOpen, SettingClose }) {
         }
     };
 
+    const handleReset = () => {
+        const confirmReset = window.confirm("정말로 초기화할까요? 저장된 진행 상황이 모두 사라집니다!");
+        if (confirmReset) {
+            localStorage.clear(); // 모든 저장 데이터 삭제
+            alert("초기화가 완료되었습니다!");
+            // 🔄 필요 시 페이지 리로드 (선택 사항)
+            window.location.reload();
+        }
+    };
+
 
     return (
         <>
@@ -77,6 +87,7 @@ function Setting({ SettingOpen, SettingClose }) {
                             <button onClick={toggleSound}>{isMuted ? "🔇" : "🔊"}</button>
                         </div>
                     </li>
+                    <button className="reset" onClick={handleReset}>초기화</button>
                 </ul>
                 <br />
                 <button className="close" onClick={SettingClose}>닫기</button>

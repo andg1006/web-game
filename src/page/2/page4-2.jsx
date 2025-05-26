@@ -8,19 +8,20 @@ import '../css/back-img3.css';
 // 교무실 둘러보기
 
 const dialogues = [
-    { speaker: 'an', text: ' 역시 계단은 힘들다...' },
-    { speaker: 'an', text: ' 여긴... 왜 이렇게 어두워?' },
-    { speaker: 'choi', text: ' 멍청아... 밤이니까 어둡지...' },
-    { speaker: 'an', text: ' 헤헷...' },
-    { speaker: 'choi', text: ' 헤헷?' },
-    { speaker: 'an', text: ' 미안...' },
-    { speaker: 'choi', text: ' 그래, 일단 반을 가볼까?' },
-    { speaker: 'an', text: ' 빨리 갔다가 나오자...' },
-    { speaker: 'an', text: ' ?!' },
-    { speaker: 'choi', text: ' ?!' },
-    { speaker: 'choi', text: ' 방금... 뭐였...' },
-    { speaker: 'an2', text: ' 으아아악!!!' },
+    { speaker: 'an',    text: ' 역시 계단은 힘들다...' },
+    { speaker: 'an',    text: ' 여긴... 왜 이렇게 어두워?' },
+    { speaker: 'choi',  text: ' 멍청아... 밤이니까 어둡지...' },
+    { speaker: 'an',    text: ' 헤헷...' },
+    { speaker: 'choi',  text: ' 헤헷?' },
+    { speaker: 'an',    text: ' 미안...' },
+    { speaker: 'choi',  text: ' 그래, 일단 반을 가볼까?' },
+    { speaker: 'an',    text: ' 빨리 갔다가 나오자...' },
+    { speaker: 'an',    text: ' ?!' },
+    { speaker: 'choi',  text: ' ?!' },
+    { speaker: 'choi',  text: ' 방금... 뭐였...' },
+    { speaker: 'an2',   text: ' 으아아악!!!' },
     { speaker: 'choi2', text: ' 야...야!! 어디가!!' },
+    { speaker: 'choi2', text: ' 같이가!!!!' },
 ];
 
 function Page4_2() {

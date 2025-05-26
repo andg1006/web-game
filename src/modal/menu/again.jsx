@@ -7,6 +7,7 @@ function Again({ AgainOpen, AgainClose }) {
 
     const goToHome = () => {
         navigate('/web-game/');
+        alert('저장 완료!');
     };
 
     return (

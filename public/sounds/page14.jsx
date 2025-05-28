@@ -18,9 +18,10 @@ const dialogues = [
     { speaker: 'choi2', text: ' 뒤돌아 보지 말고 도망쳐!!!' },
     { speaker: 'kim', text: ' 갑자기 도망치라니?' },
     { speaker: 'choi2', text: ' 얼른!!! 절대 뒤돌지마!!' },
+    { speaker: 'an2', text: ' 뭔데...!!' },
 ];
 const dialogues2 = [
-    { speaker: 'an', text: ' ?!' },
+    { speaker: 'an', text: ' 아무 것도 없구만...' },
     { speaker: 'an', text: ' 으아아악!!!!' },
 ];
 
@@ -54,7 +55,7 @@ function Page14() {
     const handleSaveRanking = () => {
         if (playerName.trim() !== '') {
             saveRanking(playerName, finalScore); // ✅ 점수와 이름 저장
-            navigate('/web-game/'); // 저장 후 홈으로 이동
+            navigate('/web-game'); // 저장 후 홈으로 이동
         }
     };
 

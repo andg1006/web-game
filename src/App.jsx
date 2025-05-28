@@ -1,5 +1,9 @@
-import { Routes, Route, useLocation } from 'react-router-dom';
-import { useRef } from 'react';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import { createContext, useState, useRef, useEffect } from 'react';
+import RankingModal from './modal/rank/RankingModal';
+import { saveRanking } from './utils/saveRanking';
+
+export const TimerContext = createContext();
 
 import Home from './Home';
 import In_development from './page/In-development';
@@ -32,67 +36,209 @@ import Page11 from './page/4/page11';
 import Page12 from './page/4/page12';
 import Page13 from './page/4/page13';
 import Page14 from './page/4/page14';
+import Page15 from './page/4/page15';
+import Page16 from './page/4/page16';
 
 function App() {
   const bgmPlayerRef = useRef();
-  const location = useLocation(); // 현재 경로 확인
+  const location = useLocation();
+  const navigate = useNavigate(); // ✅ 추가!
+
+  const [showModal, setShowModal] = useState(false);
+  const [finalScore] = useState(150); // 임시 점수
+
+  const [startTime, setStartTime] = useState(null);
+  const [elapsedTime, setElapsedTime] = useState(() => {
+    const saved = localStorage.getItem('elapsedTime');
+    return saved ? Number(saved) : 0;
+  });
+  const [baseTime, setBaseTime] = useState(null);
+  const timerRef = useRef(null);
+
+  const [timerRunning, setTimerRunning] = useState(true); // ⬅️ 타이머 ON/OFF 제어 추가
+
+  const [devMode, setDevMode] = useState(false);
+
+  useEffect(() => {
+    // 콘솔에서 activateDevMode() 호출하면 devMode가 true됨
+    window.activateDevMode = () => {
+      console.log('🛠 개발자 모드 활성화됨!');
+      setDevMode(true);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (location.pathname === '/web-game/') {
+      // 홈에서는 타이머 멈추고 초기화까지
+      setTimerRunning(false);
+      setElapsedTime(0); // ✅ 타이머 초기화!
+      localStorage.removeItem('elapsedTime'); // ✅ 저장된 시간도 삭제!
+      return;
+    }
+
+    // 다른 페이지에서는 타이머 작동
+    const now = performance.now();
+    setBaseTime(now);
+
+    timerRef.current = setInterval(() => {
+      setElapsedTime((prev) => {
+        const newElapsed = prev + (performance.now() - now);
+        clearInterval(timerRef.current); // 타이머 새로 덮어쓰기 방지
+        timerRef.current = setInterval(() => {
+          setElapsedTime((prev2) => prev2 + 10);
+        }, 10);
+        return newElapsed;
+      });
+    }, 10);
+
+    return () => clearInterval(timerRef.current);
+  }, [location.pathname]);
+
+  // ✅ 치트키 기능
+  useEffect(() => {
+    if (!devMode) return; // ❌ 개발자 모드가 아니라면 무시!
+
+    const handleKeyDown = (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+      switch (e.key) {
+        case '1':
+          navigate('/web-game/page4/chapter');
+          break;
+        case '2':
+          navigate('/web-game/page2');
+          break;
+        case '3':
+          navigate('/web-game/page3');
+          break;
+        case '4':
+          navigate('/web-game/page4/chapter1');
+          break;
+        case '5':
+          navigate('/web-game/page4/chapter1');
+          break;
+        case '6':
+          navigate('/web-game/page4/page2');
+          break;
+        case '7':
+          navigate('/web-game/page9-2-1');
+          break;
+        case '8':
+          navigate('/web-game/page14');
+          break;
+        case '9':
+          navigate('/web-game/page16');
+          break;
+        case '0':
+          setShowModal(true);
+          break;
+        default:
+          break;
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [devMode, navigate]);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      // F5 또는 Ctrl+R 막기
+      if (e.key === 'F5' || (e.ctrlKey && e.key === 'r')) {
+        e.preventDefault();
+        alert('새로고침은 사용할 수 없습니다!');
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   const isHiddenPage =
     location.pathname === '/web-game/' || location.pathname.includes('/web-game/phone');
 
   return (
-    <>
-      <BgmPlayer ref={bgmPlayerRef} />
-      
-      {!isHiddenPage && (
-        <BgmControl
-          audioRef={
-            bgmPlayerRef.current?.getAudio
-              ? { current: bgmPlayerRef.current.getAudio() }
-              : { current: null }
-          }
-        />
-      )}
+    <TimerContext.Provider value={{
+      elapsedTime,
+      setElapsedTime,
+      timerRunning,
+      setTimerRunning // ✅ 요거 추가!
+    }}>
+      <>
+        <BgmPlayer ref={bgmPlayerRef} />
 
-      <Routes>
-        {/* 기타 */}
-        <Route path="/web-game/" element={<Home />} /> {/* 메인 */}
-        <Route path="/web-game/In-development" element={<In_development />} /> {/* 개발 중 */}
+        <div style={{
+          position: 'fixed',
+          top: '100px',
+          right: '30px',
+          backgroundColor: 'white',
+          color: 'black',
+          padding: '8px 12px',
+          borderRadius: '8px',
+          fontSize: '14px',
+          zIndex: 9999
+        }}>
+          ⏱ 경과 시간: {(elapsedTime / 1000).toFixed(2)}초
+        </div>
 
-        {/* 챕터 1 */}
-        <Route path="/web-game/phone" element={<Phone />} />
-        <Route path="/web-game/page1" element={<Page1 />} />
-        <Route path="/web-game/page2" element={<Page2 />} />
-        <Route path="/web-game/page3" element={<Page3 />} />
+        {!isHiddenPage && (
+          <BgmControl
+            audioRef={
+              bgmPlayerRef.current?.getAudio
+                ? { current: bgmPlayerRef.current.getAudio() }
+                : { current: null }
+            }
+          />
+        )}
 
-        {/* 챕터 2 */}
-        <Route path="/web-game/page4" element={<Page4 />} />
-        <Route path="/web-game/page4/page1" element={<Page4_2 />} />
-        <Route path="/web-game/page4/page2" element={<Page4_2_1 />} />
-        <Route path="/web-game/page4/chapter" element={<Page4_1 />} />
-        <Route path="/web-game/page4/chapter1" element={<Chapter1 />} />
-        <Route path="/web-game/page4/chapter2" element={<Chapter2 />} />
-        <Route path="/web-game/page4/chapter3" element={<Chapter3 />} />
+        {showModal && (
+          <RankingModal
+            score={finalScore}
+            onRegister={(name, overwrite = false) => {
+              saveRanking(name, finalScore, overwrite);
+              setShowModal(false);
+            }}
+            onCancel={() => setShowModal(false)}
+          />
+        )}
 
-        {/* 쳅터 3 */}
-        <Route path="/web-game/page5" element={<Page5 />} />
-        <Route path="/web-game/page6" element={<Page6 />} />
-        <Route path="/web-game/page7" element={<Page7 />} />
-        <Route path="/web-game/page8" element={<Page8 />} />
-        <Route path="/web-game/page9" element={<Page9 />} />
-        <Route path="/web-game/page9-2" element={<Page9_2 />} />
-        <Route path="/web-game/page9-2-1" element={<Page9_2_1 />} />
-        <Route path="/web-game/page10" element={<Page10 />} />
+        <Routes>
+          {/* 이하 라우트 코드는 그대로 유지 */}
+          <Route path="/web-game/" element={<Home />} />
+          <Route path="/web-game/In-development" element={<In_development />} />
 
-        {/* 쳅터 4 */}
-        <Route path="/web-game/page11" element={<Page11 />} />
-        <Route path="/web-game/page12" element={<Page12 />} />
-        <Route path="/web-game/page13" element={<Page13 />} />
-        <Route path="/web-game/page14" element={<Page14 />} />
+          <Route path="/web-game/phone" element={<Phone />} />
+          <Route path="/web-game/page1" element={<Page1 />} />
+          <Route path="/web-game/page2" element={<Page2 />} />
+          <Route path="/web-game/page3" element={<Page3 />} />
 
-      </Routes>
-    </>
+          <Route path="/web-game/page4" element={<Page4 />} />
+          <Route path="/web-game/page4/page1" element={<Page4_2 />} />
+          <Route path="/web-game/page4/page2" element={<Page4_2_1 />} />
+          <Route path="/web-game/page4/chapter" element={<Page4_1 />} />
+          <Route path="/web-game/page4/chapter1" element={<Chapter1 />} />
+          <Route path="/web-game/page4/chapter2" element={<Chapter2 />} />
+          <Route path="/web-game/page4/chapter3" element={<Chapter3 />} />
+
+          <Route path="/web-game/page5" element={<Page5 />} />
+          <Route path="/web-game/page6" element={<Page6 />} />
+          <Route path="/web-game/page7" element={<Page7 />} />
+          <Route path="/web-game/page8" element={<Page8 />} />
+          <Route path="/web-game/page9" element={<Page9 />} />
+          <Route path="/web-game/page9-2" element={<Page9_2 />} />
+          <Route path="/web-game/page9-2-1" element={<Page9_2_1 />} />
+          <Route path="/web-game/page10" element={<Page10 />} />
+
+          <Route path="/web-game/page11" element={<Page11 />} />
+          <Route path="/web-game/page12" element={<Page12 />} />
+          <Route path="/web-game/page13" element={<Page13 />} />
+          <Route path="/web-game/page14" element={<Page14 />} />
+          <Route path="/web-game/page15" element={<Page15 />} />
+          <Route path="/web-game/page16" element={<Page16 />} />
+        </Routes>
+      </>
+    </TimerContext.Provider>
   );
 }
 
-export default App; 
+export default App;

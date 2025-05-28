@@ -42,12 +42,16 @@ function Home() {
         <div>
           <Rule RuleOpen={isRuleOpen} RuleClose={RuleClose} />
           <Setting_menu />
+          <div className="logo2">
+            <button onClick={() => setIsRankingOpen(true)}>
+              <img src={import.meta.env.BASE_URL + "images/ranking.png"} alt="ranking" />
+            </button>
+          </div>
           <div className="container">
             <p>오후 9시</p>
             <ul className="menu">
               <li><button onClick={handleStartClick}>게임 시작</button></li>
               <li><button onClick={RuleOpen}>게임 설명</button></li>
-              <li><button onClick={() => setIsRankingOpen(true)}>🏆 랭킹 보기</button></li>
             </ul>
           </div>
           <Ranking RankingOpen={isRankingOpen} RankingClose={() => setIsRankingOpen(false)}>

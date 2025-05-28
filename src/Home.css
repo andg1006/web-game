@@ -46,6 +46,26 @@ body {
     top: 0;
 }
 
+.logo {
+    width: 60px;
+    height: 60px;
+}
+.logo2 {
+    width: 60px;
+    height: 60px;
+
+    position: absolute;
+    left: 100px;
+    top: 20px;
+}
+.logo2 button {
+    width: 100%;
+    height: 100%;
+}
+.logo2 img {
+    width: 100%;
+    height: 100%;
+}
 .header .logo {
     width: 60px;
     height: 60px;
